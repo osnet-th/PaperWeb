@@ -23,7 +23,7 @@ public class LoginController {
 
 
     // 회원 가입
-    @PostMapping(value = "/sign-up")
+    @GetMapping(value = "/sign-up")
     public String doSignUp(HttpServletRequest request) {
         loginService.signUpService();
         return "login";

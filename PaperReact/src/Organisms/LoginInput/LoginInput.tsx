@@ -4,6 +4,10 @@ import {ButtonA} from "../../Atoms/Button/Button";
 import {CheckBox} from "../../Atoms/CheckBox/CheckBox";
 import {TextLink} from "../../Atoms/TextLink/TextLink";
 import {Label} from "../../Atoms/Label/Label";
+import axios from "axios";
+
+
+
 
 const Container = styled.div`
     margin: 20px;
@@ -29,9 +33,25 @@ const ButtonContainer = styled.div`
 
 export const LoginInput = () => {
 
-    const login = () => {
 
-        console.log("Login 요청");
+
+
+    const login = () => {
+        const form = new FormData();
+        form.append("id", "admin");
+        form.append("pw", "P@ssw0rd");
+
+        axios({
+            method:'post',
+            url:'http://localhost:8080/login-request',
+            data: form,
+        })
+        .then((result)=>{console.log('요청성공')
+            console.log(result)
+        })
+        .catch((error)=>{console.log('요청실패')
+            console.log(error)
+        })
     }
 
     return  <Container>

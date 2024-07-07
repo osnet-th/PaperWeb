@@ -18,12 +18,12 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/template/**","/loginPage").permitAll()
+                        .requestMatchers("/template/**","/loginPage", "sign-up").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(formLogin -> formLogin
                         .loginPage("/loginPage")
@@ -34,23 +34,6 @@ public class SecurityConfig {
                         .permitAll()
                 ).build();
 
-    }
-
-    @Bean
-    public InMemoryUserDetailsManager userDetailsService() {
-        UserDetails user1 = User.withUsername("user1")
-                .password(passwordEncoder().encode("user1Pass"))
-                .roles("USER")
-                .build();
-        UserDetails user2 = User.withUsername("user2")
-                .password(passwordEncoder().encode("user2Pass"))
-                .roles("USER")
-                .build();
-        UserDetails admin = User.withUsername("admin")
-                .password(passwordEncoder().encode("adminPass"))
-                .roles("ADMIN")
-                .build();
-        return new InMemoryUserDetailsManager(user1, user2, admin);
     }
 
     @Bean
