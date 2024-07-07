@@ -5,6 +5,7 @@ import {CheckBox} from "../../Atoms/CheckBox/CheckBox";
 import {TextLink} from "../../Atoms/TextLink/TextLink";
 import {Label} from "../../Atoms/Label/Label";
 import axios from "axios";
+import {useState} from "react";
 
 
 
@@ -32,19 +33,21 @@ const ButtonContainer = styled.div`
 
 
 export const LoginInput = () => {
-
-
-
+    const [id, setId] = useState<string>("");
+    const [password , setPassword] = useState<string>("");
 
     const login = () => {
         const form = new FormData();
-        form.append("id", "admin");
-        form.append("pw", "P@ssw0rd");
+        form.append("id", id);
+        form.append("pw", password);
 
         axios({
             method:'post',
             url:'http://localhost:8080/login-request',
             data: form,
+            headers:{
+                "Content-Type": "application/x-www-form-urlencoded"
+            }
         })
         .then((result)=>{console.log('요청성공')
             console.log(result)
@@ -53,19 +56,24 @@ export const LoginInput = () => {
             console.log(error)
         })
     }
+    const handleChange = (e:React.ChangeEvent<HTMLInputElement> , label:string) =>{
+        if (label === 'email') setId(e.target.value);
+        else setPassword(e.target.value);
+    };
 
     return  <Container>
         <LabelContainer><Label label="Sign In"/></LabelContainer>
-        <LabelInput label="EMAIL" type="email"/>
-        <LabelInput label="PASSWORD" type="password"/>
+        <LabelInput label="EMAIL" type="email" onChange={e => {handleChange(e, "email")}}/>
+        <LabelInput label="PASSWORD" type="password" onChange={e => {handleChange(e, "password")}}/>
         <RowContainer>
             <CheckBox label="Remember Me"/>
+            <TextLink text="Sign Up Here" path="/sign-up"/>
         </RowContainer>
         <ButtonContainer>
             <ButtonA label="LOGIN" onClick={login}/>
         </ButtonContainer>
         <ButtonContainer />
-        <TextLink text="Forgot Password?"/>
+        <TextLink text="Forgot Password?" path="/"/>
     </Container>
 
 }

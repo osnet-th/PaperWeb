@@ -1,6 +1,7 @@
 package com.paper.paperspring.service;
 
 
+import com.paper.paperspring.dto.JoinAccount;
 import com.paper.paperspring.entity.Account;
 import com.paper.paperspring.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,17 +20,18 @@ public class LoginService {
         this.accountRepository = accountRepository;
     }
 
-    public void signUpService() {
+    public JoinAccount signUpService(JoinAccount joinAccount) {
         Account account = new Account();
-        account.setId("admin");
-        account.setPw(passwordEncoder.encode("P@ssw0rd"));
+        account.setId(joinAccount.getId());
+        account.setPw(passwordEncoder.encode(joinAccount.getPassword()));
         account.setLocked(false);
         account.setExpired(false);
         account.setRole("ADMIN");
         account.setEnabled(true);
         account.setCredentialExpired(false);
 
-        accountRepository.save(account);
+        Account save = accountRepository.save(account);
+        return joinAccount;
 
     }
 

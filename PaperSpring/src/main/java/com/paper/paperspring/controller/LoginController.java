@@ -1,10 +1,12 @@
 package com.paper.paperspring.controller;
 
 
+import com.paper.paperspring.dto.JoinAccount;
 import com.paper.paperspring.service.LoginService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,10 +25,11 @@ public class LoginController {
 
 
     // 회원 가입
-    @GetMapping(value = "/sign-up")
-    public String doSignUp(HttpServletRequest request) {
-        loginService.signUpService();
-        return "login";
+    @PostMapping(value = "/sign-up")
+    public ResponseEntity<JoinAccount> doSignUp(HttpServletRequest request, @RequestBody JoinAccount joinAccount) {
+        log.info(joinAccount.toString());
+        loginService.signUpService(joinAccount);
+        return ResponseEntity.ok().body(joinAccount);
     }
 
 

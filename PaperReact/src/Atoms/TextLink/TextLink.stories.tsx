@@ -11,6 +11,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 export const Basic = {
     args: {
-        text: "Forgot your password?"
+        text: "Forgot your password?",
+        path: "/"
     }
 } satisfies Story;
