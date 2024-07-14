@@ -1,4 +1,4 @@
-import {LabelInput} from "../../Molecules/LabelInput";
+import {LabelInput} from "../../Molecules/LabelInput/LabelInput";
 import styled from "@emotion/styled";
 import {ButtonA} from "../../Atoms/Button/Button";
 import {CheckBox} from "../../Atoms/CheckBox/CheckBox";
@@ -6,6 +6,7 @@ import {TextLink} from "../../Atoms/TextLink/TextLink";
 import {Label} from "../../Atoms/Label/Label";
 import axios from "axios";
 import {useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 
 
@@ -35,22 +36,19 @@ const ButtonContainer = styled.div`
 export const LoginInput = () => {
     const [id, setId] = useState<string>("");
     const [password , setPassword] = useState<string>("");
-
+    const navigate = useNavigate();
     const login = () => {
         const form = new FormData();
         form.append("id", id);
         form.append("pw", password);
 
         axios({
-            method:'post',
             url:'http://localhost:8080/login-request',
+            method:'post',
             data: form,
-            headers:{
-                "Content-Type": "application/x-www-form-urlencoded"
-            }
         })
-        .then((result)=>{console.log('요청성공')
-            console.log(result)
+        .then((result)=>{console.log('요청성공 : ', result)
+            navigate("/");
         })
         .catch((error)=>{console.log('요청실패')
             console.log(error)

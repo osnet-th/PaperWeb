@@ -1,9 +1,10 @@
 import styled from "@emotion/styled";
 import {Label} from "../../Atoms/Label/Label";
-import {LabelInput} from "../../Molecules/LabelInput";
+import {LabelInput} from "../../Molecules/LabelInput/LabelInput";
 import {ButtonA} from "../../Atoms/Button/Button";
 import axios from "axios";
 import {useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 
 const Container = styled.div`
@@ -26,7 +27,7 @@ export const SignUpInput = () => {
     const [email, setEmail] = useState<string>("");
     const [passwd, setPasswd] = useState<string>("");
     const [cPasswd, setCpasswd] = useState<string>("");
-
+    const navigate = useNavigate();
     const signUp = () => {
         if(email === '') return;
         if(passwd === '') return;
@@ -48,12 +49,12 @@ export const SignUpInput = () => {
             method:'post',
             url:'http://localhost:8080/sign-up',
             headers: {
-                "Content-Type": "application/json",
+                "Content-Type": "application/json"
             },
             data: JSON.stringify(SignUp),
         })
         .then((result)=>{
-            console.log(result)
+            navigate("/login");
         })
         .catch((error)=>{
             console.log('요청실패')

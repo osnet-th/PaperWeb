@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import {Label} from "../Atoms/Label/Label";
-import {TextInput} from "../Atoms/TextInput/TextInput";
+import {Label} from "../../Atoms/Label/Label";
+import {TextInput} from "../../Atoms/TextInput/TextInput";
 
 
 const Container = styled.div`

@@ -1,4 +1,6 @@
-import type { Preview } from "@storybook/react";
+import type {Preview, StoryObj} from "@storybook/react";
+import {BrowserRouter} from "react-router-dom";
+import {Story} from "@storybook/blocks";
 
 const preview: Preview = {
   parameters: {
@@ -8,7 +10,7 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
-  },
+  }
 };
 
 export default preview;

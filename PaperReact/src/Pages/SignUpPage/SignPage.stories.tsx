@@ -1,10 +1,10 @@
-import {LoginTemplate} from "./LoginTemplate";
 import {Meta, StoryObj} from "@storybook/react";
+import {SignUpPage} from "./SignPage";
 import {BrowserRouter} from "react-router-dom";
 
 const meta = {
-    title : "Templates/Login",
-    component: LoginTemplate,
+    title: "Pages/SignUpPage",
+    component: SignUpPage,
     decorators : [
         (Story) => (
             <BrowserRouter>
@@ -12,7 +12,7 @@ const meta = {
             </BrowserRouter>
         ),
     ],
-} satisfies Meta<typeof LoginTemplate>
+} satisfies Meta<typeof SignUpPage>
 
 export default meta;
 
