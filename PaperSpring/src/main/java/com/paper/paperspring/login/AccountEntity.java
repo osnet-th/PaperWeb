@@ -1,7 +1,6 @@
-package com.paper.paperspring.entity;
+package com.paper.paperspring.login;
 
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -14,7 +13,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Account {
+public class AccountEntity {
 
     @Id
     private String id;
@@ -24,7 +23,5 @@ public class Account {
     private boolean locked;
     private boolean credentialExpired;
     private boolean enabled;
-
-
 
 }

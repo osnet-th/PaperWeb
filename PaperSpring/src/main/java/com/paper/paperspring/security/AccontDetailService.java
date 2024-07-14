@@ -1,8 +1,8 @@
 package com.paper.paperspring.security;
 
-import com.paper.paperspring.dto.AccountDetails;
-import com.paper.paperspring.entity.Account;
-import com.paper.paperspring.repository.AccountRepository;
+import com.paper.paperspring.login.AccountDetails;
+import com.paper.paperspring.login.AccountEntity;
+import com.paper.paperspring.login.AccountRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,7 +26,7 @@ public class AccontDetailService implements UserDetailsService {
             throw new UsernameNotFoundException(username);
         }
 
-        Optional<Account> account = accountRepository.findById(username);
+        Optional<AccountEntity> account = accountRepository.findById(username);
         if(account.isEmpty())
             throw new UsernameNotFoundException(username);
 

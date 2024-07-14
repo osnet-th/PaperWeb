@@ -1,6 +1,5 @@
-package com.paper.paperspring.dto;
+package com.paper.paperspring.login;
 
-import com.paper.paperspring.entity.Account;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -9,10 +8,10 @@ import java.util.Collection;
 
 public class AccountDetails implements UserDetails {
 
-    private Account account;
+    private AccountEntity accountEntity;
 
-    public AccountDetails(Account account) {
-        this.account = account;
+    public AccountDetails(AccountEntity accountEntity) {
+        this.accountEntity = accountEntity;
     }
 
     @Override
@@ -21,7 +20,7 @@ public class AccountDetails implements UserDetails {
         collection.add(new GrantedAuthority() {
             @Override
             public String getAuthority() {
-                return account.getRole();
+                return accountEntity.getRole();
             }
         });
         return collection;
@@ -29,12 +28,12 @@ public class AccountDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        return this.account.getPw();
+        return this.accountEntity.getPw();
     }
 
     @Override
     public String getUsername() {
-        return this.account.getId();
+        return this.accountEntity.getId();
     }
 
     @Override
@@ -54,6 +53,6 @@ public class AccountDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return this.account.isEnabled();
+        return this.accountEntity.isEnabled();
     }
 }
