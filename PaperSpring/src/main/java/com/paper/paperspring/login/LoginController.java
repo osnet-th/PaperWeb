@@ -14,9 +14,12 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
-    @GetMapping(value = "/sign-in")
-    public String doSignIn(HttpServletRequest request) {
-        return "login";
+    @PostMapping("/login-success")
+    public ResponseEntity<JoinAccount> doSignIn(HttpServletRequest request, Principal principal) {
+        log.info("로그인 성공 !");
+        AccountDto loginUser = new AccountDto();
+        loginUser.setId(principal.getName());
+        return ResponseEntity.ok().body(loginUser);
     }
 
 
