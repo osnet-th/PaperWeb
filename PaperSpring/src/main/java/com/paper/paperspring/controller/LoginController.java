@@ -10,16 +10,22 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+
 
 @Slf4j
-@RestController(value = "/login")
+@RestController
 public class LoginController {
+
     @Autowired
     private LoginService loginService;
 
-    @GetMapping(value = "/sign-in")
-    public String doSignIn(HttpServletRequest request) {
-        return "login";
+    @PostMapping("/login-success")
+    public ResponseEntity<JoinAccount> doSignIn(HttpServletRequest request, Principal principal) {
+        log.info("로그인 성공 !");
+        JoinAccount loginUser = new JoinAccount();
+        loginUser.setId(principal.getName());
+        return ResponseEntity.ok().body(loginUser);
     }
 
 
@@ -31,6 +37,7 @@ public class LoginController {
         loginService.signUpService(joinAccount);
         return ResponseEntity.ok().body(joinAccount);
     }
+
 
 
 }

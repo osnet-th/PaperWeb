@@ -39,17 +39,17 @@ public class AccountDetails implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return this.account.isExpired();
+        return !this.account.isExpired();
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return this.account.isLocked();
+        return !this.account.isLocked();
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return this.account.isCredentialExpired();
+        return !this.account.isCredentialExpired();
     }
 
     @Override
