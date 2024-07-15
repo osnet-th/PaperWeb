@@ -18,24 +18,26 @@ export const Posts = () => {
     <Container>
         <Card sx={
             {   boxShadow: 3,
-                width: 1100 ,
+                width: 500,
                 borderRadius:8,
                 '&:hover': {
                     cursor: "pointer",
                 },
+                margin: 1
             }}
             onClick={() => window.open("https://velog.io/@thlee98/posts")} >
-            <CardImage img={velog} />
+            <CardImage img={velog} width="500" height="200"/>
         </Card>
         <Card sx={
             {   boxShadow: 3,
-                width: 1100,
+                width: 500,
                 borderRadius:8,
                 '&:hover': {
                     cursor: "pointer",
                 },
+                margin: 1
             }} onClick={() => window.open("https://github.com/osnet-th")}>
-            <CardImage img={github} />
+            <CardImage img={github} width="500" height="200"/>
         </Card>
     </Container>
     )
