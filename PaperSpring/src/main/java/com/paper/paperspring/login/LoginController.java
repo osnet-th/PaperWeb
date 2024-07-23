@@ -7,15 +7,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+
+
 
 @Slf4j
-@RestController(value = "/login")
+@RestController
 public class LoginController {
+
     @Autowired
     private LoginService loginService;
 
     @PostMapping("/login-success")
-    public ResponseEntity<JoinAccount> doSignIn(HttpServletRequest request, Principal principal) {
+    public ResponseEntity<AccountDto> doSignIn(HttpServletRequest request, Principal principal) {
         log.info("로그인 성공 !");
         AccountDto loginUser = new AccountDto();
         loginUser.setId(principal.getName());
@@ -26,11 +30,12 @@ public class LoginController {
 
     // 회원 가입
     @PostMapping(value = "/sign-up")
-    public ResponseEntity<AccountDto> doSignUp(HttpServletRequest request, @RequestBody AccountDto joinAccountDto) {
-        log.info(joinAccountDto.toString());
-        loginService.signUpService(joinAccountDto);
-        return ResponseEntity.ok().body(joinAccountDto);
+    public ResponseEntity<AccountDto> doSignUp(HttpServletRequest request, @RequestBody AccountDto joinAccount) {
+        log.info(joinAccount.toString());
+        loginService.signUpService(joinAccount);
+        return ResponseEntity.ok().body(joinAccount);
     }
+
 
 
 }

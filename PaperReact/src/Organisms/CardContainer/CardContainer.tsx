@@ -3,6 +3,9 @@ import {AvatarContainer} from "../../Atoms/AvatarContainer/AvatarContainer";
 import {LabelText} from "../../Molecules/LabelText/LabelText";
 import styled from "@emotion/styled";
 import {Text} from "../../Atoms/Text/Text";
+import * as React from "react";
+import {useEffect, useState} from "react";
+import axios from "axios";
 
 
 const Container = styled.div`
@@ -29,8 +32,39 @@ const AboutContainer = styled.div`
 `
 
 
+
+type Item = {
+    tag: string,
+    content: string;
+}
+
+
 export const CardContainer = () => {
+    const [items , setItems] = useState(Array<Item>());
+
+    useEffect(() => {
+        if(items.length === 0) {
+            axios({
+                url: 'http://localhost:8080/get/about-me',
+                method: 'get',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                // data: JSON.stringify(contents),
+            })
+            .then((result) => {
+                setItems(result.data.contents);
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+        }
+    });
+
+
+
     return(
+        <>
         <Container>
             <Card sx={{boxShadow: 3, width: 1000}}>
                 <CardContent>
@@ -40,14 +74,20 @@ export const CardContainer = () => {
                     <ContentsContainer>
                         <AvatarContainer/>
                         <AboutContainer>
-                            <LabelText label="이름 :" text="이태형"/>
-                            <LabelText label="생년월일 :" text="1998.12.14"/>
-                            <LabelText label="학력 :" text="명지전문대 졸업 - 방송통신대학교 재학중"/>
-                            <LabelText label="직업 :" text="웹 개발자"/>
+                            {
+                                items.map((i) => {
+                                    return <LabelText
+                                        key={i.tag}
+                                        label={i.tag}
+                                        text={i.content}
+                                    />
+                                })
+                            }
                         </AboutContainer>
                     </ContentsContainer>
                 </CardContent>
             </Card>
         </Container>
+        </>
     );
 }

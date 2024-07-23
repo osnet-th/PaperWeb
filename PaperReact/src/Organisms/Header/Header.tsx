@@ -1,97 +1,38 @@
-// import React from 'react';
-//
-// import { ButtonA } from '../../Atoms/Button/Button';
-// import './header.css';
-//
-// type User = {
-//   name: string;
-// };
-//
-// interface HeaderProps {
-//   user?: User;
-//   onLogin?: () => void;
-//   onLogout?: () => void;
-//   onCreateAccount?: () => void;
-// }
-//
-// export const Header = ({ user, onLogin, onLogout, onCreateAccount }: HeaderProps) => (
-//   <header>
-//     <div className="storybook-header">
-//       <div>
-//         <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-//           <g fill="none" fillRule="evenodd">
-//             <path
-//               d="M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z"
-//               fill="#FFF"
-//             />
-//             <path
-//               d="M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z"
-//               fill="#555AB9"
-//             />
-//             <path
-//               d="M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z"
-//               fill="#91BAF8"
-//             />
-//           </g>
-//         </svg>
-//         <h1>Acme</h1>
-//       </div>
-//       <div>
-//         {user ? (
-//           <>
-//             <span className="welcome">
-//               Welcome, <b>{user.name}</b>!
-//             </span>
-//             <ButtonA onClick={onLogout} label="Log out" />
-//           </>
-//         ) : (
-//           <>
-//             <ButtonA onClick={onLogin} label="Log in" />
-//             <ButtonA  onClick={onCreateAccount} label="Sign up" />
-//           </>
-//         )}
-//       </div>
-//     </div>
-//   </header>
-// );
-
-
 import * as React from 'react';
 import Toolbar from '@mui/material/Toolbar';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import SearchIcon from '@mui/icons-material/Search';
 import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
+import {TextButton} from "../../Atoms/TextButton/TextButton";
+import {useNavigate} from "react-router-dom";
 
 interface HeaderProps {
-  title: string;
+    title: string;
 }
 
 export const Header = (props: HeaderProps) => {
-  const { title } = props;
-
-  return (
-      <React.Fragment>
-        <Toolbar sx={{ borderBottom: 1, borderColor: 'divider', height: 80 }}>
-          <Button >ADMIN?</Button>
-          <Typography
-              component="h2"
-              variant="h5"
-              color="inherit"
-              align="center"
-              noWrap
-              sx={{ flex: 1 }}
-          >
-            {title}
-          </Typography>
-          <IconButton>
-            <SearchIcon />
-          </IconButton>
-          <Button variant="outlined" size="small">
-            Sign up
-          </Button>
-        </Toolbar>
-      </React.Fragment>
-  );
+    const {title} = props;
+    const navigate = useNavigate();
+    return (
+        <React.Fragment>
+            <Toolbar sx={{borderBottom: 1, borderColor: 'divider', height: 80}}>
+                <Typography
+                    component="h2"
+                    variant="h5"
+                    color="inherit"
+                    align="center"
+                    sx={{flex: 2}}
+                >
+                    {title}
+                </Typography>
+                {
+                    true ?
+                        <TextButton text="ADMIN" onClick={() => {
+                            navigate("/login");
+                        }}/>
+                        : <TextButton text="LOGOUT" onClick={() => {
+                            console.log("LOGOUT")
+                        }}/>
+                }
+            </Toolbar>
+        </React.Fragment>
+    );
 }

@@ -7,9 +7,18 @@ import * as React from "react";
 import {Introduction} from "../../Organisms/Introduction/Introduction";
 import img from "./img.jpg";
 import {Footer} from "../../Organisms/Footer/Footer";
+import {Fab} from "@mui/material";
 
 const CarouselContainer = styled.div`
     padding: 30px;
+`
+
+
+const FloatingContainer = styled.div`
+    position: fixed; 
+    right: 10px;
+    bottom: 125px;
+    transform: translateX(-50%);
 `
 
 
@@ -34,6 +43,11 @@ export const MainPage = () => {
             <ImageCarouselTemplate/>
         </CarouselContainer>
         <PostsTemplate/>
+        <FloatingContainer>
+            <Fab variant="extended" color="primary">
+                chat
+            </Fab>
+        </FloatingContainer>
         <Footer description="저작권 정보 기입 필요" title="저작권 정보" />
     </>);
 }

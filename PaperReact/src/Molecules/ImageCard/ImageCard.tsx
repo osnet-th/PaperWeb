@@ -2,6 +2,9 @@ import {Card, CardActions, CardContent, CardMedia, Typography, Button} from "@mu
 import img from './img.png';
 import styled from "@emotion/styled";
 import {CardImage} from "../../Atoms/CardImage/CardImage";
+import {TextButton} from "../../Atoms/TextButton/TextButton";
+import * as React from "react";
+import {useNavigate} from "react-router-dom";
 
 
 const Container = styled.div`

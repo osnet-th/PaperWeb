@@ -23,7 +23,7 @@ export const Posts = () => {
                 '&:hover': {
                     cursor: "pointer",
                 },
-                margin: 1
+                margin: 3
             }}
             onClick={() => window.open("https://velog.io/@thlee98/posts")} >
             <CardImage img={velog} width="500" height="200"/>
@@ -35,7 +35,7 @@ export const Posts = () => {
                 '&:hover': {
                     cursor: "pointer",
                 },
-                margin: 1
+                margin: 3
             }} onClick={() => window.open("https://github.com/osnet-th")}>
             <CardImage img={github} width="500" height="200"/>
         </Card>
