@@ -1,17 +1,13 @@
-import {TextField} from "@mui/material";
 import {LabelInput} from "../../Molecules/LabelInput/LabelInput";
-import Box from "@mui/material/Box";
+import {LabelMultilineText} from "../../Molecules/LabelMultilineText/LabelMultilineText";
+import React from "react";
+import {LabelImageList} from "../../Molecules/LabelImageList/LabelImageList";
+
 
 export const ProjectWrite = () => {
     return <div>
         <LabelInput label="제목" type="text" />
-        <Box
-            sx={{
-                width: '100%',
-                maxWidth: '100%',
-            }}
-        >
-            <TextField fullWidth id="fullWidth" />
-        </Box>
+        <LabelImageList/>
+        <LabelMultilineText label="프로젝트 내용"/>
     </div>
 }

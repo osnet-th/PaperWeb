@@ -1,5 +1,14 @@
+import {ProjectWrite} from "../../Organisms/ProjectWrite/ProjectWrite";
+import styled from "@emotion/styled";
 
+
+const Container = styled.div`
+    padding : 20px;
+    
+`
 
 export const ProjectWritePage = () => {
-    return <div>A</div>
+    return <Container>
+        <ProjectWrite/>
+    </Container>
 }
