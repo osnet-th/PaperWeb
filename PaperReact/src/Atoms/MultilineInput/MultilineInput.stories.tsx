@@ -1,6 +1,7 @@
 
 import {Meta, StoryObj} from "@storybook/react";
 import {MultilineInput} from "./MultilineInput";
+import {fn} from "@storybook/test";
 
 const meta= {
     title: "Atoms/MultilineInput",
@@ -12,4 +13,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Basic= {
+    args : {
+        onChange: fn
+    }
 } satisfies Story;

@@ -5,6 +5,8 @@ import {ImageInputDialog} from "../../Organisms/ImageInputDialog/ImageInputDialo
 import {TextListDialog} from "../../Organisms/TextListDialog/TextListDialog";
 import * as React from "react";
 import {useState} from "react";
+import {useSelector} from "react-redux";
+import {RootState} from "../../Redux/Store/store";
 
 
 const Container = styled.div`
@@ -18,6 +20,8 @@ const ButtonContainer = styled.div`
 export const AboutMeTemplate = () => {
     const [contentsOpen, setContentsOpen] = useState(false);
     const [imageOpen, setImageOpen] = useState(false);
+    const auth = useSelector((state: RootState) => state.auth.isLogin);
+
 
 
     const handleClickContentsOpen = () => {
@@ -40,7 +44,7 @@ export const AboutMeTemplate = () => {
         <Container>
             {
                 // TODO: 관리자 권한이 있는 경우에만 추가하기 버튼이 나오도록 변경
-                true ?
+                auth ?
                     <ButtonContainer>
                         <TextButton text="이미지 수정하기" onClick={handleClickImageOpen}/>
                         <TextButton text="콘텐츠 수정하기" onClick={handleClickContentsOpen}/>

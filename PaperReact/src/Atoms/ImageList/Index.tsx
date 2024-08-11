@@ -7,7 +7,7 @@ import styled from "@emotion/styled";
 
 interface Props {
     readonly imgList:Array<string>;
-    readonly onClick?: () => void ;
+    readonly imageDelete: (index:number) => void ;
 }
 
 
@@ -17,12 +17,10 @@ const Container = styled.div`
     padding: 15px;
     
 `
-export const ImageListIndex = ({imgList, onClick}:Props) => {
-    console.log(imgList);
-
+export const ImageListIndex = ({imgList, imageDelete}:Props) => {
     return <Container>
         <ImageList sx={{ overflowX: 'scroll', display: 'flex',}} >
-            {imgList.map((img) => (
+            {imgList.map((img,index) => (
                 <ImageListItem key={img}>
                     <img
                         srcSet={`${img}`}
@@ -37,7 +35,7 @@ export const ImageListIndex = ({imgList, onClick}:Props) => {
                         actionIcon={
                             <IconButton
                                 sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
-                                onClick={onClick}
+                                onClick={() => imageDelete(index)}
                             >
                                 <DeleteForeverIcon />
                             </IconButton>

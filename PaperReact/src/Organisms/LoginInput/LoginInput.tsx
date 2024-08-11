@@ -7,6 +7,8 @@ import {Label} from "../../Atoms/Label/Label";
 import axios from "axios";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {login} from "../../Redux/Slice/loginSlice";
 
 
 
@@ -37,7 +39,9 @@ export const LoginInput = () => {
     const [id, setId] = useState<string>("");
     const [password , setPassword] = useState<string>("");
     const navigate = useNavigate();
-    const login = () => {
+    const dispatch = useDispatch();
+
+    const loginAction = () => {
         const form = new FormData();
         form.append("id", id);
         form.append("pw", password);
@@ -48,6 +52,7 @@ export const LoginInput = () => {
             data: form,
         })
         .then((result)=>{console.log('요청성공 : ', result)
+            dispatch(login());
             navigate("/");
         })
         .catch((error)=>{console.log('요청실패')
@@ -68,7 +73,7 @@ export const LoginInput = () => {
             <TextLink text="Sign Up Here" path="/sign-up"/>
         </RowContainer>
         <ButtonContainer>
-            <ButtonA label="LOGIN" onClick={login}/>
+            <ButtonA label="LOGIN" onClick={loginAction}/>
         </ButtonContainer>
         <ButtonContainer />
         <TextLink text="Forgot Password?" path="/"/>

@@ -1,5 +1,6 @@
 import {LabelMultilineText} from "./LabelMultilineText";
 import {Meta, StoryObj} from "@storybook/react";
+import {fn} from "@storybook/test";
 
 
 const meta = {
@@ -13,6 +14,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 export const Basic = {
     args:{
-        label: "내용"
+        label: "내용",
+        onChange: fn
     }
 } satisfies Story;

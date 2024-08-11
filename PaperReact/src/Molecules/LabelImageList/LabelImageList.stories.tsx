@@ -1,5 +1,6 @@
 import {Meta, StoryObj} from "@storybook/react";
 import {LabelImageList} from "./LabelImageList";
+import {fn} from "@storybook/test";
 
 const meta = {
     title: "Molecules/LabelImageList",
@@ -12,6 +13,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Basic = {
     args : {
-        label: '사진'
+        imageUpload: fn,
+        imageDelete:fn,
+        previewImg: []
     }
 } satisfies Story;
