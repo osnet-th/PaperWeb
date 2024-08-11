@@ -7,6 +7,7 @@ import * as React from "react";
 import {useState} from "react";
 import {useSelector} from "react-redux";
 import {RootState} from "../../Redux/Store/store";
+import {PersistGate} from "redux-persist/integration/react";
 
 
 const Container = styled.div`

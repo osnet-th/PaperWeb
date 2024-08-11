@@ -2,6 +2,7 @@ package com.paper.paperspring.upload;
 
 import com.paper.paperspring.upload.aboutme.AboutMeDto;
 import com.paper.paperspring.upload.aboutme.AboutMeUploadService;
+import com.paper.paperspring.upload.project.ProjectDto;
 import com.paper.paperspring.upload.project.ProjectUploadService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +49,9 @@ public class UploadController {
 
     // 프로젝트 글 등록
     @PostMapping("/upload/projects")
-    public ResponseEntity<?> requestUploadProject() {
+    public ResponseEntity<?> requestUploadProject(String title, String content, List<MultipartFile> imgFiles) {
+
+        log.info("aaaaa");
         return null;
     }
 

@@ -11,6 +11,6 @@ import java.util.List;
 @Setter
 public class ProjectDto {
     private String title;
-    private String description;
+    private String contents;
     private List<UploadImageDto> projectImages;
 }

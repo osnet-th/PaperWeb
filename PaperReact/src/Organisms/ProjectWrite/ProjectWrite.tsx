@@ -4,12 +4,23 @@ import React, {useState} from "react";
 import {LabelImageList} from "../../Molecules/LabelImageList/LabelImageList";
 import {ButtonA} from "../../Atoms/Button/Button";
 import styled from "@emotion/styled";
+import {useNavigate} from "react-router-dom";
+import axios from "axios";
 
 
 const ButtonContainer = styled.div`
     display: flex;
     flex-direction: row;
     padding: 10px;
+    justify-content: end;
+`
+
+const Button = styled.div`
+    padding: 10px;
+`
+
+const Container = styled.div`
+    width: 80%;
 `
 
 export const ProjectWrite = () => {
@@ -17,11 +28,12 @@ export const ProjectWrite = () => {
     const [title, setTitle] = useState<string>("");
     const [postImgs, setPostImgs] = useState<File[]>([]);
     const [previewImgs, setPreviewImgs] = useState<string[]>([]);
+    const navigate = useNavigate();
 
 
     const changeImgs = (e: React.ChangeEvent<HTMLInputElement>) => {
         imagePreview(e.target.files);
-        uploadImgFn(e.target.files);
+        setUploadImg(e.target.files);
     }
     const imagePreview = (imgFiles : FileList | null) => {
         if(!imgFiles) return ;
@@ -35,16 +47,13 @@ export const ProjectWrite = () => {
         console.log(imgUrls);
     }
 
-    const uploadImgFn = (imgFiles : FileList | null) => {
+    const setUploadImg = (imgFiles : FileList | null) => {
         if(!imgFiles) return ;
         if(postImgs.length >= 4) return;
 
         for(let i=0; i<imgFiles.length ; i++) {
             postImgs.push(imgFiles[i]);
         }
-
-
-        console.log(postImgs);
     }
 
     const imageDelete = (index: number) => {
@@ -70,16 +79,57 @@ export const ProjectWrite = () => {
 
 
     const uploadProjectWrite = () => {
+        const formData = new FormData();
+
+        formData.append("title", title);
+        formData.append("content", content);
+        for (let i = 0; i < postImgs.length; i++) {
+            formData.append('imgFiles', postImgs[i]);
+        }
+
+
+        axios({
+            url: 'http://localhost:8080/upload/projects',
+            method: 'post',
+            data: formData,
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+            // data: JSON.stringify(contents),
+        })
+            .then((result) => {
+                console.log("요청 성공")
+            })
+            .catch((error) => {
+                console.log('요청실패')
+                console.log(error)
+            })
+
+
+
         console.log(title, content, postImgs);
     }
 
-    return <div>
+    const writeCancle = () => {
+        setTitle("");
+        setContent("");
+        setPreviewImgs([]);
+        setPostImgs([]);
+
+        navigate("/");
+    }
+
+    return <Container>
         <LabelInput label="제목" type="text" onChange={titleWrite}/>
         <LabelImageList previewImg={previewImgs} imageUpload={changeImgs} imageDelete={imageDelete}/>
         <LabelMultilineText label="프로젝트 내용" onChange={contentWrite}/>
         <ButtonContainer>
-            <ButtonA label="취소"/>
-            <ButtonA label="작성" onClick={uploadProjectWrite}/>
+            <Button>
+                <ButtonA label="취소" size="lg" onClick={writeCancle}/>
+            </Button>
+            <Button>
+                <ButtonA label="작성" size="lg" onClick={uploadProjectWrite}/>
+            </Button>
         </ButtonContainer>
-    </div>
+    </Container>
 }

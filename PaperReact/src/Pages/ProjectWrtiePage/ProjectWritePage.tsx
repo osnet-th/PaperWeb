@@ -10,8 +10,9 @@ const Container = styled.div`
     padding : 20px;
     display: flex;
     flex-direction: column;
-    width: 700px ;
-    height: 500px;
+    align-items: center;
+    width: 100% ;
+    height: 100%;
 `
 
 
@@ -19,9 +20,8 @@ export const ProjectWritePage = () => {
 
     return <>
         <Header title="Blog"/>
-    <Container>
-        <ProjectWrite/>
-
-    </Container>
+        <Container>
+            <ProjectWrite/>
+        </Container>
         </>
 }
