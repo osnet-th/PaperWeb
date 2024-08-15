@@ -13,15 +13,12 @@ public class FileSave {
     public FileSave() {
 
     }
-    public FileSave(File file, String originalFileName, long fileSize) {
-        this.fileName = file.getName();
-        this.requestUrl = file.getAbsolutePath();
-        this.originalFileName = originalFileName;
+    public FileSave(String fileName, String requestUrl, long fileSize) {
+        this.fileName = fileName;
+        this.requestUrl = requestUrl;
         this.fileSize = fileSize;
     }
 
-
-    String originalFileName;
     String requestUrl;
     String fileName;
     long fileSize;
