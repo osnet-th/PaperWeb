@@ -50,7 +50,7 @@ public class UploadController {
     // 프로젝트 글 등록
     @PostMapping("/upload/projects")
     public ResponseEntity<?> requestUploadProject(String title, String content, List<MultipartFile> imgFiles) {
-
+        projectUploadService.uploadProject(title, content, imgFiles);
         log.info("aaaaa");
         return null;
     }

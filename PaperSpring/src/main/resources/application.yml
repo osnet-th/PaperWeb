@@ -18,3 +18,6 @@ spring:
     multipart:
       maxFileSize: 20MB # 파일 하나의 최대 크기
       maxRequestSize: 30MB  # 한 번에 최대 업로드 가능 용량
+  upload:
+    image:
+      root: "C:/Image"
