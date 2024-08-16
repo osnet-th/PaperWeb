@@ -21,10 +21,7 @@ public class AboutMeImageEntity {
     @Id
     private String fileName;
 
-    @Lob
-    private String file;
+    private String requestUrl;
 
     private LocalDateTime insertDate;
-
-
 }

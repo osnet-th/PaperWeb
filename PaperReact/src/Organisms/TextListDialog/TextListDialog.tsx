@@ -22,9 +22,10 @@ type Content = {
 
 export const TextListDialog = ({open, handleClose}:Props) => {
     const [items , setItems] = useState(Array<Item>());
+    const [request, setRequest] = useState<boolean>(true);
 
     useEffect(() => {
-        if(items.length === 0) {
+        if(request) {
             axios({
                 url: 'http://localhost:8080/get/about-me',
                 method: 'get',
@@ -34,6 +35,7 @@ export const TextListDialog = ({open, handleClose}:Props) => {
                 // data: JSON.stringify(contents),
             })
                 .then((result) => {
+                    if(result.data.contents.length === 0) setRequest(false);
                     setItems(result.data.contents);
                 })
                 .catch((error) => {

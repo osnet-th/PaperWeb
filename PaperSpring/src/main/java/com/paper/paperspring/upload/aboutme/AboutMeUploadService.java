@@ -6,6 +6,7 @@ import com.paper.paperspring.exception.NotSupportedFileException;
 import com.paper.paperspring.login.AccountDto;
 import com.paper.paperspring.upload.Upload;
 import com.paper.paperspring.upload.UploadImageDto;
+import com.paper.paperspring.upload.util.FileSave;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,12 +89,10 @@ public class AboutMeUploadService extends Upload {
     }
 
     private AboutMeImageEntity generateAboutMeImage(MultipartFile image) throws NullPointerException, NotSupportedFileException, IOException {
-        List<String> sExt = Arrays.asList("image/jpeg", "image/pjpeg", "image/png", "image/gif", "image/bmp", "image/x-windows-bmp");
-        try {
-            if (!sExt.contains(image.getContentType()))
-                throw new NotSupportedFileException("이미지 파일만 지원합니다. - 요청 파일(" + image.getContentType() + ") 는 지원하지 않습니다.");
 
-            return new AboutMeImageEntity(image.getName(), conversionImage(image.getBytes()), LocalDateTime.now());
+        try {
+            FileSave fileSave = imageUrlBasedUpload(image);
+            return new AboutMeImageEntity(fileSave.getFileName(), fileSave.getRequestUrl(), LocalDateTime.now());
         } catch (NullPointerException e) {
             log.error("AboutMe Image 데이터 조합 중 Null 값이 존재합니다. {}", e.getMessage());
             throw e;
@@ -132,7 +131,7 @@ public class AboutMeUploadService extends Upload {
         try {
             Optional<AboutMeImageEntity> image = imageRepository.findFirstByOrderByInsertDateDesc();
             if (image.isPresent()) {
-                return new UploadImageDto(image.get().getFileName(), image.get().getFile());
+                return new UploadImageDto(image.get().getFileName(), image.get().getRequestUrl());
             }
             return null;
         } catch (Exception e) {

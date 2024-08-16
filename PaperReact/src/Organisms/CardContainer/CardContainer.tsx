@@ -40,10 +40,11 @@ type Item = {
 
 
 export const CardContainer = () => {
-    const [items , setItems] = useState(Array<Item>());
-
+    const [photo, setPhoto] = useState("");
+    const [tags , setTags] = useState(Array<Item>());
+    const [request, setRequest] = useState<boolean>(true);
     useEffect(() => {
-        if(items.length === 0) {
+        if(request) {
             axios({
                 url: 'http://localhost:8080/get/about-me',
                 method: 'get',
@@ -53,7 +54,14 @@ export const CardContainer = () => {
                 // data: JSON.stringify(contents),
             })
             .then((result) => {
-                setItems(result.data.contents);
+                console.log(result.data);
+                if(result.data.contents.length === 0) setRequest(false);
+                setPhoto("");
+                setPhoto(photo + result.data.myPhotos.requestUrl);
+                console.log(photo);
+
+
+                setTags(result.data.contents);
             })
             .catch((error) => {
                 console.log(error)
@@ -72,10 +80,10 @@ export const CardContainer = () => {
                         <Text text="ABOUT ME" />
                     </TitleContainer>
                     <ContentsContainer>
-                        <AvatarContainer/>
+                        <AvatarContainer imgUrl={photo}/>
                         <AboutContainer>
                             {
-                                items.map((i) => {
+                                tags.map((i) => {
                                     return <LabelText
                                         key={i.tag}
                                         label={i.tag}

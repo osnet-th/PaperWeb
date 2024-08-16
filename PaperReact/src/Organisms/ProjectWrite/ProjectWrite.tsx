@@ -98,7 +98,7 @@ export const ProjectWrite = () => {
             // data: JSON.stringify(contents),
         })
             .then((result) => {
-                console.log("요청 성공")
+                console.log("요청 성공", result.data)
             })
             .catch((error) => {
                 console.log('요청실패')
