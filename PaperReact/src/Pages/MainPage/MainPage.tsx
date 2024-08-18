@@ -1,6 +1,6 @@
 import {Header} from "../../Organisms/Header/Header";
 import styled from "@emotion/styled";
-import {ImageCarouselTemplate} from "../../Templates/ImageCarouselTemplate/ImageCarouselTemplate";
+import {ImageCarouselTemplate} from "../../Templates/ProjectImageCarouselTemplate/ImageCarouselTemplate";
 import {AboutMeTemplate} from "../../Templates/AboutMeTemplate/AboutMeTemplate";
 import {PostsTemplate} from "../../Templates/PostsTemplate/PostsTemplate";
 import * as React from "react";

@@ -17,12 +17,14 @@ const ButtonContainer = styled.div`
 
 
 interface Props {
+    readonly id: number;
     readonly title:string;
     readonly summary:string;
+    readonly img: string;
     readonly onClick?: () => void;
 }
 
-export const ImageCard = ({title, summary, onClick}:Props) => {
+export const ImageCard = ({id, title, summary, img, onClick}:Props) => {
     return (
         <Container>
             <Card>

@@ -6,10 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 @Setter
@@ -41,6 +38,12 @@ public class AboutMeDto {
         public Content() {
 
         }
+
+        public Content(String tag) {
+            this.tag = tag;
+            this.content = "";
+        }
+
         public Content(String tag, String content) {
             this.tag = tag;
             this.content = content;
@@ -51,5 +54,8 @@ public class AboutMeDto {
 
     }
 
-
+    public static List<Content> defaultContentForm() {
+        List<String> defaultTags = Arrays.asList("이름", "생년월일","직업","학력","취미","특기");
+        return defaultTags.stream().map(tag -> new Content(tag)).toList();
+    }
 }

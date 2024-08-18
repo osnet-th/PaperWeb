@@ -35,7 +35,7 @@ export const TextListDialog = ({open, handleClose}:Props) => {
                 // data: JSON.stringify(contents),
             })
                 .then((result) => {
-                    if(result.data.contents.length === 0) setRequest(false);
+                    setRequest(false);
                     setItems(result.data.contents);
                 })
                 .catch((error) => {

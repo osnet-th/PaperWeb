@@ -54,14 +54,9 @@ export const CardContainer = () => {
                 // data: JSON.stringify(contents),
             })
             .then((result) => {
-                console.log(result.data);
-                if(result.data.contents.length === 0) setRequest(false);
-                setPhoto("");
-                setPhoto(photo + result.data.myPhotos.requestUrl);
-                console.log(photo);
-
-
+                setPhoto(result.data.myPhotos.requestUrl);
                 setTags(result.data.contents);
+                setRequest(false);
             })
             .catch((error) => {
                 console.log(error)

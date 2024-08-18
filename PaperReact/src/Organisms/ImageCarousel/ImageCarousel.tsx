@@ -22,14 +22,17 @@ const SliderContainer = styled.div`
     display: block;
 `
 
+interface Props {
+    readonly items: Item[];
+}
 
-export const ImageCarousel = () => {
+export const ImageCarousel = ({items}:Props) => {
     return (
         <SliderContainer>
             <Slider {...settings}>
                 {
                     items.map((item, index) => {
-                        return <Project item={item} key={index}/>
+                        return <Project item={item} key={item.id}/>
                     })
                 }
             </Slider>
@@ -39,10 +42,10 @@ export const ImageCarousel = () => {
 
 
 type Item = {
+    id: number,
     title: string,
     summary: string,
-    color: string,
-    href: string
+    img: string
 }
 
 interface ProjectProps {
@@ -51,33 +54,6 @@ interface ProjectProps {
 
 const Project = ({item}: ProjectProps) => {
     return (
-        <ImageCard title={item.title} summary={item.summary}/>
+        <ImageCard id={item.id} title={item.title} img={item.img} summary={item.summary}/>
     )
 }
-
-const items: Item[] = [
-    {
-        title: "Lear Music Reader",
-        summary: "A PDF Reader specially designed for musicians.",
-        color: "#64ACC8",
-        href: 'https://github.com/Learus/Lear-Music-Reader'
-    },
-    {
-        title: "Hash Code 2019",
-        summary: "My Solution on the 2019 Hash Code by Google Slideshow problem.",
-        color: "#7D85B1",
-        href: 'https://github.com/Learus/HashCode2019'
-    },
-    {
-        title: "Terrio",
-        summary: "A exciting mobile game game made in the Unity Engine.",
-        color: "#CE7E78",
-        href: 'https://play.google.com/store/apps/details?id=com.Brewery.Terrio'
-    },
-    {
-        title: "React Carousel",
-        summary: "A Generic carousel UI component for React using material ui.",
-        color: "#C9A27E",
-        href: 'https://github.com/Learus/react-material-ui-carousel'
-    }
-]

@@ -29,6 +29,7 @@ public class UploadController {
     // About ME 업로드 요청
     @PostMapping("/upload/about-me/image")
     public ResponseEntity<?> requestUploadAboutMeImage(@RequestBody MultipartFile image) {
+        log.info(">>> About Me 이미지를 업로드합니다.");
         boolean result = aboutMeUploadService.uploadAboutMeImage(image);
         return ResponseEntity.ok(result);
     }
@@ -49,15 +50,16 @@ public class UploadController {
 
     // 프로젝트 글 등록
     @PostMapping("/upload/projects")
-    public ResponseEntity<?> requestUploadProject(String title, String content, List<MultipartFile> imgFiles) {
-        ProjectDto dto = projectUploadService.uploadProject(title, content, imgFiles);
+    public ResponseEntity<ProjectDto> requestUploadProject(String title,String summary ,String content, List<MultipartFile> imgFiles) {
+        ProjectDto dto = projectUploadService.uploadProject(title, summary, content, imgFiles);
         return ResponseEntity.ok().body(dto);
     }
 
     // 프로젝트 리스트 요청
     @GetMapping("/get/projects")
-    public ResponseEntity<?> getProjectsList() {
-        return null;
+    public ResponseEntity<List<ProjectDto>> getProjectsList() {
+        List<ProjectDto> results = projectUploadService.getProjects();
+        return ResponseEntity.ok().body(results);
     }
 
     // 프로젝트 상세 요청

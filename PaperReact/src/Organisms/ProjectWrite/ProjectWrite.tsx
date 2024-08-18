@@ -26,6 +26,7 @@ const Container = styled.div`
 export const ProjectWrite = () => {
     const [content, setContent] = useState<string>("");
     const [title, setTitle] = useState<string>("");
+    const [summary, setSummary] = useState<string>("");
     const [postImgs, setPostImgs] = useState<File[]>([]);
     const [previewImgs, setPreviewImgs] = useState<string[]>([]);
     const navigate = useNavigate();
@@ -77,11 +78,15 @@ export const ProjectWrite = () => {
         setTitle(e.target.value);
     }
 
+    const summaryWrite = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSummary(e.target.value);
+    }
 
     const uploadProjectWrite = () => {
         const formData = new FormData();
 
         formData.append("title", title);
+        formData.append("summary", summary);
         formData.append("content", content);
         for (let i = 0; i < postImgs.length; i++) {
             formData.append('imgFiles', postImgs[i]);
@@ -113,6 +118,7 @@ export const ProjectWrite = () => {
     const writeCancle = () => {
         setTitle("");
         setContent("");
+        setSummary("");
         setPreviewImgs([]);
         setPostImgs([]);
 
@@ -122,6 +128,7 @@ export const ProjectWrite = () => {
     return <Container>
         <LabelInput label="제목" type="text" onChange={titleWrite}/>
         <LabelImageList previewImg={previewImgs} imageUpload={changeImgs} imageDelete={imageDelete}/>
+        <LabelInput label="요약" type="text" onChange={summaryWrite}/>
         <LabelMultilineText label="프로젝트 내용" onChange={contentWrite}/>
         <ButtonContainer>
             <Button>

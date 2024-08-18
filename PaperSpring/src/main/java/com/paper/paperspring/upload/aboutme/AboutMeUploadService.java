@@ -78,16 +78,6 @@ public class AboutMeUploadService extends Upload {
         }
     }
 
-    private String conversionImage(byte[] imageBytes) {
-        Base64.Encoder encoder = Base64.getEncoder();
-        byte[] photoEncode = encoder.encode(imageBytes);
-        try {
-            return new String(photoEncode, "UTF8");
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     private AboutMeImageEntity generateAboutMeImage(MultipartFile image) throws NullPointerException, NotSupportedFileException, IOException {
 
         try {
@@ -123,7 +113,6 @@ public class AboutMeUploadService extends Upload {
 
     private AboutMeDto generateAboutMeDto(UploadImageDto image, List<AboutMeDto.Content> contents) {
         AboutMeDto dto = new AboutMeDto(image, contents);
-        contents.clear();
         return dto;
     }
 
@@ -144,6 +133,7 @@ public class AboutMeUploadService extends Upload {
         List<AboutMeDto.Content> result = new ArrayList<>();
         try {
             List<AboutMeContentEntity> contents = contentRepository.findAll();
+            if(Objects.isNull(contents) || contents.isEmpty()) return AboutMeDto.defaultContentForm();
             contents.forEach(content -> {
                 result.add(new AboutMeDto.Content(content.getTag(), content.getContent()));
             });

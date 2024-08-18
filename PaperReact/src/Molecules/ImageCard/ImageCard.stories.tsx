@@ -12,8 +12,10 @@ type Story = StoryObj<typeof meta>;
 
 export const Basic = {
     args : {
+        id: 1,
         title: "Lizard",
         summary: "Lizards are a widespread group of squamate reptiles, with over 6,000\n" +
-            "species, ranging across all continents except Antarctica"
+            "species, ranging across all continents except Antarctica",
+        img: ""
     }
 } satisfies Story;
