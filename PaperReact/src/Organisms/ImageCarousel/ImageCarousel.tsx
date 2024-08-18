@@ -32,7 +32,8 @@ export const ImageCarousel = ({items}:Props) => {
             <Slider {...settings}>
                 {
                     items.map((item, index) => {
-                        return <Project item={item} key={item.id}/>
+                        console.log("그려짐", item);
+                        return <ImageCard id={item.id} title={item.title} img={item.img} summary={item.summary}/>
                     })
                 }
             </Slider>
@@ -48,12 +49,3 @@ type Item = {
     img: string
 }
 
-interface ProjectProps {
-    item: Item
-}
-
-const Project = ({item}: ProjectProps) => {
-    return (
-        <ImageCard id={item.id} title={item.title} img={item.img} summary={item.summary}/>
-    )
-}

@@ -31,40 +31,18 @@ const AboutContainer = styled.div`
     align-items: baseline;
 `
 
-
-
 type Item = {
     tag: string,
     content: string;
 }
 
-
-export const CardContainer = () => {
-    const [photo, setPhoto] = useState("");
-    const [tags , setTags] = useState(Array<Item>());
-    const [request, setRequest] = useState<boolean>(true);
-    useEffect(() => {
-        if(request) {
-            axios({
-                url: 'http://localhost:8080/get/about-me',
-                method: 'get',
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                // data: JSON.stringify(contents),
-            })
-            .then((result) => {
-                setPhoto(result.data.myPhotos.requestUrl);
-                setTags(result.data.contents);
-                setRequest(false);
-            })
-            .catch((error) => {
-                console.log(error)
-            })
-        }
-    });
+interface Props {
+    readonly photo: string;
+    readonly items: Item[];
+}
 
 
+export const CardContainer = ({photo, items}:Props) => {
 
     return(
         <>
@@ -78,7 +56,7 @@ export const CardContainer = () => {
                         <AvatarContainer imgUrl={photo}/>
                         <AboutContainer>
                             {
-                                tags.map((i) => {
+                                items.map((i) => {
                                     return <LabelText
                                         key={i.tag}
                                         label={i.tag}

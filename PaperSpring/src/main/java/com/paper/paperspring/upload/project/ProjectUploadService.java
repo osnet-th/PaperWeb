@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -18,6 +19,13 @@ public class ProjectUploadService extends Upload {
     @Autowired
     private ProjectRepository projectRepository;
 
+    public ProjectDto getProjectDetail(Long projectId) {
+        Optional<ProjectEntity> projectEntity = projectRepository.findById(projectId);
+        if(projectEntity.isPresent()) {
+            return convertProjectDto(projectEntity.get());
+        }
+        return null;
+    }
     public ProjectDto uploadProject(String title, String summary, String content, List<MultipartFile> images) {
         log.info("프로젝트({}) 게시글을 저장합니다. 요약 - {} , 내용 - {}",title, summary, content);
         List<FileSave> fileList = imageUrlBasedUpload(images);

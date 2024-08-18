@@ -36,7 +36,8 @@ export const ImageCarouselTemplate = () => {
 
     useEffect(() => {
         if(request) {
-            const dataList= [...items];
+            console.log("프로젝트 요청");
+            const dataList = [] as Item[];
             axios({
                 url: 'http://localhost:8080/get/projects',
                 method: 'get',
@@ -46,12 +47,14 @@ export const ImageCarouselTemplate = () => {
                 // data: JSON.stringify(contents),
             })
             .then((result) => {
+                console.log(result.data);
                 result.data.forEach((data: any) => {
+                    console.log(data);
                     dataList.push({
-                        id: result.data.id,
+                        id: data.id,
                         img: data.projectImages[0].requestUrl,
-                        title: result.data.title,
-                        summary: result.data.summary});
+                        title: data.title,
+                        summary: data.summary});
                 });
                 setRequest(false);
                 setItems(dataList);

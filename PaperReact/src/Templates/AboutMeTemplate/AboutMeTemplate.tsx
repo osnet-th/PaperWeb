@@ -4,10 +4,11 @@ import {TextButton} from "../../Atoms/TextButton/TextButton";
 import {ImageInputDialog} from "../../Organisms/ImageInputDialog/ImageInputDialog";
 import {TextListDialog} from "../../Organisms/TextListDialog/TextListDialog";
 import * as React from "react";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import {RootState} from "../../Redux/Store/store";
 import {PersistGate} from "redux-persist/integration/react";
+import axios from "axios";
 
 
 const Container = styled.div`
@@ -18,9 +19,18 @@ const Container = styled.div`
 const ButtonContainer = styled.div`
     text-align: center;
 `
+
+type Item = {
+    tag: string,
+    content: string;
+}
+
 export const AboutMeTemplate = () => {
     const [contentsOpen, setContentsOpen] = useState(false);
     const [imageOpen, setImageOpen] = useState(false);
+    const [photo, setPhoto] = useState("");
+    const [tags , setTags] = useState(Array<Item>());
+    const [request, setRequest] = useState<boolean>(true);
     const auth = useSelector((state: RootState) => state.auth.isLogin);
 
 
@@ -41,6 +51,37 @@ export const AboutMeTemplate = () => {
         setImageOpen(false);
     };
 
+
+    useEffect(() => {
+        if(request) {
+            axios({
+                url: 'http://localhost:8080/get/about-me',
+                method: 'get',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                // data: JSON.stringify(contents),
+            })
+                .then((result) => {
+                    setPhoto(result.data.myPhotos.requestUrl);
+                    setTags(result.data.contents);
+                    setRequest(false);
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
+        }
+    });
+
+    const updateAboutMeContents = (e:React.ChangeEvent<HTMLInputElement>) => {
+        tags.forEach((data: Item) => {
+            if(data.tag === e.target.name) {
+                data.content = e.target.value
+            }
+        })
+        setTags([...tags]);
+    };
+
     return (
         <Container>
             {
@@ -53,8 +94,8 @@ export const AboutMeTemplate = () => {
                     : null
             }
             <ImageInputDialog open={imageOpen} handleClose={handleImageClose} />
-            <TextListDialog open={contentsOpen} handleClose={handleContentsClose}/>
-            <CardContainer/>
+            <TextListDialog items={tags} open={contentsOpen} handleClose={handleContentsClose} onChange={updateAboutMeContents}/>
+            <CardContainer photo={photo} items={tags}/>
         </Container>
     );
 }

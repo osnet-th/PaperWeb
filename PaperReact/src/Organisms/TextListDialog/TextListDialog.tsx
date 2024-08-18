@@ -9,8 +9,10 @@ type Item = {
 }
 
 interface Props {
+    readonly items: Item[];
     readonly open:boolean;
     readonly handleClose: () => void;
+    readonly onChange: (e:React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 
@@ -20,29 +22,7 @@ type Content = {
     content : FormDataEntryValue;
 }
 
-export const TextListDialog = ({open, handleClose}:Props) => {
-    const [items , setItems] = useState(Array<Item>());
-    const [request, setRequest] = useState<boolean>(true);
-
-    useEffect(() => {
-        if(request) {
-            axios({
-                url: 'http://localhost:8080/get/about-me',
-                method: 'get',
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                // data: JSON.stringify(contents),
-            })
-                .then((result) => {
-                    setRequest(false);
-                    setItems(result.data.contents);
-                })
-                .catch((error) => {
-                    console.log(error)
-                })
-        }
-    });
+export const TextListDialog = ({items, open, handleClose, onChange}:Props) => {
 
     return <Fragment>
         <Dialog
@@ -90,10 +70,7 @@ export const TextListDialog = ({open, handleClose}:Props) => {
                             type="text"
                             fullWidth
                             value={item.content}
-                            onChange={(e) => {
-                                item.content = e.target.value;
-                                setItems([...items]);
-                            }}
+                            onChange={onChange}
                         />
                     })
                 }

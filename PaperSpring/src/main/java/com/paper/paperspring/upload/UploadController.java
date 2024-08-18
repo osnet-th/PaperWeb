@@ -63,9 +63,10 @@ public class UploadController {
     }
 
     // 프로젝트 상세 요청
-    @GetMapping("/get-detail/projects")
-    public ResponseEntity<?> getProjectDetail() {
-        return null;
+    @GetMapping("/get-detail/project")
+    public ResponseEntity<ProjectDto> getProjectDetail(Long projectId) {
+        ProjectDto dto = projectUploadService.getProjectDetail(projectId);
+        return ResponseEntity.ok().body(dto);
     }
 
 }
