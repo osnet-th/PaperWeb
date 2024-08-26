@@ -9,15 +9,17 @@ const Container = styled.div`
 
 interface Props {
     readonly label:string;
-    readonly onChange:(e:React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void;
+    readonly text?: string;
+    readonly readOnly?: boolean;
+    readonly onChange?:(e:React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void;
 }
 
 
 
 
-export const LabelMultilineText = ({label, onChange}:Props) => {
+export const LabelMultilineText = ({label, readOnly=false, text="", onChange}:Props) => {
     return <Container>
         <Label label={label}/>
-    <MultilineInput onChange={onChange}/>
+    <MultilineInput onChange={onChange} text={text} readOnly={readOnly} />
 </Container>
 }

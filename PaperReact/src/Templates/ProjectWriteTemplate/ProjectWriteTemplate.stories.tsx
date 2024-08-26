@@ -1,10 +1,10 @@
 import {Meta, StoryObj} from "@storybook/react";
 import {BrowserRouter} from "react-router-dom";
-import {ProjectWrite} from "./ProjectWrite";
+import {ProjectWriteTemplate} from "./ProjectWriteTemplate";
 
 const meta = {
     title: "Organisms/ProjectDetail",
-    component: ProjectWrite,
+    component: ProjectWriteTemplate,
     decorators : [
         (Story) => (
             <BrowserRouter>
@@ -12,7 +12,7 @@ const meta = {
             </BrowserRouter>
         ),
     ],
-} satisfies Meta<typeof ProjectWrite>
+} satisfies Meta<typeof ProjectWriteTemplate>
 
 export default meta;
 

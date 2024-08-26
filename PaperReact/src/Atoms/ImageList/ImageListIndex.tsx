@@ -7,7 +7,7 @@ import styled from "@emotion/styled";
 
 interface Props {
     readonly imgList:Array<string>;
-    readonly imageDelete: (index:number) => void ;
+    readonly imageDelete?: (index:number) => void ;
 }
 
 
@@ -35,7 +35,7 @@ export const ImageListIndex = ({imgList, imageDelete}:Props) => {
                         actionIcon={
                             <IconButton
                                 sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
-                                onClick={() => imageDelete(index)}
+                                onClick={() => imageDelete?.(index)}
                             >
                                 <DeleteForeverIcon />
                             </IconButton>

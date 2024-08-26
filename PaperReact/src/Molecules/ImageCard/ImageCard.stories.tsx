@@ -1,5 +1,6 @@
 import {ImageCard} from "./ImageCard";
 import {Meta, StoryObj} from "@storybook/react";
+import {fn} from "@storybook/test";
 
 const meta = {
     title: "Molecules/ImageCard",
@@ -16,6 +17,7 @@ export const Basic = {
         title: "Lizard",
         summary: "Lizards are a widespread group of squamate reptiles, with over 6,000\n" +
             "species, ranging across all continents except Antarctica",
-        img: ""
+        img: "",
+        onClick:fn()
     }
 } satisfies Story;

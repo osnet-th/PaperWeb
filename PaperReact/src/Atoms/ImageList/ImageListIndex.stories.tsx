@@ -1,5 +1,5 @@
 import {Meta, StoryObj} from "@storybook/react";
-import {ImageListIndex} from "./Index";
+import {ImageListIndex} from "./ImageListIndex";
 import {fn} from "@storybook/test";
 
 const meta = {

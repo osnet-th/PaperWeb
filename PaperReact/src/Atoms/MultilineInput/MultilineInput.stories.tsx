@@ -14,6 +14,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Basic= {
     args : {
-        onChange: fn
+        text: "",
+        onChange: fn,
+        readOnly: false,
     }
 } satisfies Story;

@@ -14,6 +14,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Basic = {
     args: {
-        type: "email"
+        text: "",
+        type: "email",
+        readOnly: false
     }
 } satisfies Story;

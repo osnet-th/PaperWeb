@@ -21,7 +21,7 @@ interface Props {
     readonly title:string;
     readonly summary:string;
     readonly img: string;
-    readonly onClick?: () => void;
+    readonly onClick: (id:number) => void;
 }
 
 export const ImageCard = ({id, title, summary, img, onClick}:Props) => {
@@ -39,7 +39,7 @@ export const ImageCard = ({id, title, summary, img, onClick}:Props) => {
                 </CardContent>
                 <CardActions>
                     <ButtonContainer>
-                        <Button size="small" onClick={onClick}>Learn More</Button>
+                        <Button size="small" onClick={()=> {onClick(id)}}>더보기</Button>
                     </ButtonContainer>
                 </CardActions>
             </Card>

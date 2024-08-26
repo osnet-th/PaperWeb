@@ -28,7 +28,7 @@ interface Item {
     readonly summary: string;
 }
 
-export const ImageCarouselTemplate = () => {
+export const ProjectCarouselTemplate = () => {
     const [items, setItems] = useState<Item[]>([]);
     const [request, setRequest] = useState<boolean>(true);
     const navigate = useNavigate();
@@ -65,6 +65,10 @@ export const ImageCarouselTemplate = () => {
         }
     });
 
+    const seeMoreClick = (id:number) => {
+        navigate("/detail/project", {state : {id : id}})
+    }
+
 
     return(
         <Container >
@@ -79,7 +83,7 @@ export const ImageCarouselTemplate = () => {
                     </TextButtonContainer>
                     : null
             }
-            <ImageCarousel items={items}/>
+            <ImageCarousel items={items} onClick={seeMoreClick}/>
         </Container>
     )
 }

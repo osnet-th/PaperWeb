@@ -1,4 +1,4 @@
-import {ProjectWrite} from "../../Organisms/ProjectWrite/ProjectWrite";
+import {ProjectWriteTemplate} from "../../Templates/ProjectWriteTemplate/ProjectWriteTemplate";
 import styled from "@emotion/styled";
 import {ButtonA} from "../../Atoms/Button/Button";
 import {Header} from "../../Organisms/Header/Header";
@@ -21,7 +21,7 @@ export const ProjectWritePage = () => {
     return <>
         <Header title="Blog"/>
         <Container>
-            <ProjectWrite/>
+            <ProjectWriteTemplate/>
         </Container>
         </>
 }

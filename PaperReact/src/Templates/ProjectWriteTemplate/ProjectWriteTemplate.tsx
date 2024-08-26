@@ -23,7 +23,7 @@ const Container = styled.div`
     width: 80%;
 `
 
-export const ProjectWrite = () => {
+export const ProjectWriteTemplate = () => {
     const [content, setContent] = useState<string>("");
     const [title, setTitle] = useState<string>("");
     const [summary, setSummary] = useState<string>("");

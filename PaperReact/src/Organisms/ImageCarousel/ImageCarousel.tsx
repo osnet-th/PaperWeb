@@ -24,16 +24,17 @@ const SliderContainer = styled.div`
 
 interface Props {
     readonly items: Item[];
+    readonly onClick: (id:number) => void;
 }
 
-export const ImageCarousel = ({items}:Props) => {
+export const ImageCarousel = ({items, onClick}:Props) => {
     return (
         <SliderContainer>
             <Slider {...settings}>
                 {
                     items.map((item, index) => {
                         console.log("그려짐", item);
-                        return <ImageCard id={item.id} title={item.title} img={item.img} summary={item.summary}/>
+                        return <ImageCard id={item.id} title={item.title} img={item.img} summary={item.summary} onClick={onClick}/>
                     })
                 }
             </Slider>

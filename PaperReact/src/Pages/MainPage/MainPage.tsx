@@ -1,6 +1,6 @@
 import {Header} from "../../Organisms/Header/Header";
 import styled from "@emotion/styled";
-import {ImageCarouselTemplate} from "../../Templates/ProjectImageCarouselTemplate/ImageCarouselTemplate";
+import {ProjectCarouselTemplate} from "../../Templates/ProjectImageCarouselTemplate/ProjectCarouselTemplate";
 import {AboutMeTemplate} from "../../Templates/AboutMeTemplate/AboutMeTemplate";
 import {PostsTemplate} from "../../Templates/PostsTemplate/PostsTemplate";
 import * as React from "react";
@@ -40,7 +40,7 @@ export const MainPage = () => {
         <Introduction post={mainFeaturedPost}/>
         <AboutMeTemplate/>
         <CarouselContainer>
-            <ImageCarouselTemplate/>
+            <ProjectCarouselTemplate/>
         </CarouselContainer>
         <PostsTemplate/>
         <FloatingContainer>

@@ -1,5 +1,5 @@
 import {Label} from "../../Atoms/Label/Label";
-import {ImageListIndex} from "../../Atoms/ImageList/Index";
+import {ImageListIndex} from "../../Atoms/ImageList/ImageListIndex";
 import styled from "@emotion/styled";
 import React, {useState} from "react";
 
@@ -42,7 +42,6 @@ interface Props {
 export const LabelImageList = ({previewImg, imageUpload, imageDelete}: Props) => {
     // const [postImg, setPostImg] = useState([]);
 
-    console.log(previewImg);
     return <>
         <Label label="사진" />
         <LabelContainer>
