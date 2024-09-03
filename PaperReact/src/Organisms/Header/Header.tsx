@@ -8,6 +8,7 @@ import {RootState} from "../../Redux/Store/store";
 import {logout} from "../../Redux/Slice/loginSlice";
 import {useState} from "react";
 import styled from "@emotion/styled";
+import axios from "axios";
 
 interface HeaderProps {
     title: string;
@@ -43,6 +44,7 @@ export const Header = (props: HeaderProps) => {
                 {
                     auth ?
                         <TextButton text="LOGOUT" onClick={() => {
+                            axios.post('http://localhost:8080/logout');
                             dispatch(logout());
                         }}/>
                         :<TextButton text="ADMIN" onClick={() => {

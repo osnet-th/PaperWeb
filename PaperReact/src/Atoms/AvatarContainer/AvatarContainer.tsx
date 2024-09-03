@@ -6,7 +6,7 @@ interface Props {
 }
 export const AvatarContainer = ({imgUrl}:Props) => {
     return <Avatar
-               src={"http://localhost:8080"+imgUrl}
+               src={imgUrl}
                sx={{margin:'20px', width:250, height: 350}}
     />
 }

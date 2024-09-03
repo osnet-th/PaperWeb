@@ -8,6 +8,7 @@ import {Introduction} from "../../Organisms/Introduction/Introduction";
 import img from "./img.jpg";
 import {Footer} from "../../Organisms/Footer/Footer";
 import {Fab} from "@mui/material";
+import {SelfIntroductionTemplate} from "../../Templates/SelfIntroductionTemplate/SelfIntroductionTemplate";
 
 const CarouselContainer = styled.div`
     padding: 30px;
@@ -39,6 +40,7 @@ export const MainPage = () => {
         <Header title="Blog"/>
         <Introduction post={mainFeaturedPost}/>
         <AboutMeTemplate/>
+        <SelfIntroductionTemplate/>
         <CarouselContainer>
             <ProjectCarouselTemplate/>
         </CarouselContainer>

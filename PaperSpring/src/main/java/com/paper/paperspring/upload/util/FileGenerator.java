@@ -14,7 +14,7 @@ import java.util.UUID;
 
 @Slf4j
 public class FileGenerator {
-    private final String REQUEST_IMAGE = "/upload/image/";
+    private final String REQUEST_IMAGE = "/get/upload/image/";
     public static FileGenerator instance;
     String rootPath;
 

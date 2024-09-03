@@ -1,6 +1,7 @@
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField} from "@mui/material";
 import {Fragment, useEffect, useState} from "react";
 import axios from "axios";
+import {axiosInstance} from "../../Axios/instance";
 
 
 type Item = {
@@ -38,8 +39,8 @@ export const TextListDialog = ({items, open, handleClose, onChange}:Props) => {
                     formData.forEach((value, key: string) => {
                         contents.push({tag: key, content: value});
                     });
-                    axios({
-                        url:'http://localhost:8080/upload/about-me/contents',
+                    axiosInstance({
+                        url:'/upload/about-me/contents',
                         method:'post',
                         headers: {
                             "Content-Type": "application/json",

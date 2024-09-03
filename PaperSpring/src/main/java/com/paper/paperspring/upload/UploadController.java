@@ -4,6 +4,7 @@ import com.paper.paperspring.upload.aboutme.AboutMeDto;
 import com.paper.paperspring.upload.aboutme.AboutMeUploadService;
 import com.paper.paperspring.upload.project.ProjectDto;
 import com.paper.paperspring.upload.project.ProjectUploadService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.RequestEntity;
@@ -26,44 +27,46 @@ public class UploadController {
     private ProjectUploadService projectUploadService;
 
 
-    // About ME 업로드 요청
+    // About ME 업로드 요청 - 관리자 권한
     @PostMapping("/upload/about-me/image")
     public ResponseEntity<?> requestUploadAboutMeImage(@RequestBody MultipartFile image) {
         log.info(">>> About Me 이미지를 업로드합니다.");
         boolean result = aboutMeUploadService.uploadAboutMeImage(image);
         return ResponseEntity.ok(result);
     }
-    // About ME 업로드 요청
+    // About ME 업로드 요청 - 관리자 권한
     @PostMapping("/upload/about-me/contents")
-    public ResponseEntity<?> requestUploadAboutMeContents(@RequestBody List<AboutMeDto.Content> contents) {
+    public ResponseEntity<?> requestUploadAboutMeContents(@RequestBody List<AboutMeDto.Content> contents, HttpServletRequest request) {
+        log.info(request.toString());
         log.info("{}", contents);
         boolean result = aboutMeUploadService.uploadAboutMeContents(contents);
         return ResponseEntity.ok(result);
     }
 
-    // About Me 데이터 요청
+    // About Me 데이터 요청 - 권한 없음
     @GetMapping("/get/about-me")
-    public ResponseEntity<AboutMeDto> getAboutMe() {
+    public ResponseEntity<AboutMeDto> getAboutMe(HttpServletRequest request) {
+        log.info(request.toString());
         AboutMeDto dto = aboutMeUploadService.getAboutMe();
         return ResponseEntity.ok(dto);
     }
 
-    // 프로젝트 글 등록
+    // 프로젝트 글 등록 - 관리자 권한
     @PostMapping("/upload/projects")
-    public ResponseEntity<ProjectDto> requestUploadProject(String title,String summary ,String content, List<MultipartFile> imgFiles) {
-        ProjectDto dto = projectUploadService.uploadProject(title, summary, content, imgFiles);
+    public ResponseEntity<ProjectDto> requestUploadProject(String title,String summary ,String content, String review, List<MultipartFile> imgFiles) {
+        ProjectDto dto = projectUploadService.uploadProject(title, summary, content, review, imgFiles);
         return ResponseEntity.ok().body(dto);
     }
 
-    // 프로젝트 리스트 요청
+    // 프로젝트 리스트 요청 - 권한 없음
     @GetMapping("/get/projects")
     public ResponseEntity<List<ProjectDto>> getProjectsList() {
         List<ProjectDto> results = projectUploadService.getProjects();
         return ResponseEntity.ok().body(results);
     }
 
-    // 프로젝트 상세 요청
-    @GetMapping("/get-detail/project")
+    // 프로젝트 상세 요청 - 권한 없음
+    @GetMapping("/get/detail-project")
     public ResponseEntity<ProjectDto> getProjectDetail(Long projectId) {
         ProjectDto dto = projectUploadService.getProjectDetail(projectId);
         return ResponseEntity.ok().body(dto);

@@ -19,16 +19,16 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         String path = FileGenerator.FileGerator().getRootPath("/"+winRootPath, macRootPath);
-
-        registry.addResourceHandler("/upload/image/**").addResourceLocations("file://"+path);
-        registry.addResourceHandler("/test/**").addResourceLocations("file:///Users/app/Desktop/PaperWeb/Image/");
+        registry.addResourceHandler("/get/upload/image/**").addResourceLocations("file://"+path);
     }
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:8080", "http://localhost:3000")
+                .allowedOrigins("http://localhost:3000")
+//                .exposedHeaders()
                 .allowCredentials(true)
                 .allowedMethods("OPTIONS", "GET", "POST", "PUT", "DELETE")
-                .maxAge(3000);
+                .allowedHeaders("*");
+//                .maxAge(3000);
     }
 }

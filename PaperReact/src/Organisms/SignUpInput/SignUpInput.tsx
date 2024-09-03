@@ -2,9 +2,9 @@ import styled from "@emotion/styled";
 import {Label} from "../../Atoms/Label/Label";
 import {LabelInput} from "../../Molecules/LabelInput/LabelInput";
 import {ButtonA} from "../../Atoms/Button/Button";
-import axios from "axios";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
+import {axiosInstance} from "../../Axios/instance";
 
 
 const Container = styled.div`
@@ -45,12 +45,9 @@ export const SignUpInput = () => {
             password : passwd
         }
 
-        axios({
+        axiosInstance({
             method:'post',
-            url:'http://localhost:8080/sign-up',
-            headers: {
-                "Content-Type": "application/json"
-            },
+            url:'/sign-up',
             data: JSON.stringify(SignUp),
         })
         .then((result)=>{
@@ -69,9 +66,9 @@ export const SignUpInput = () => {
 
     return  <Container>
         <LabelContainer><Label label="Sign Up"/></LabelContainer>
-        <LabelInput label="EMAIL" type="email" onChange={ (e) => handleChange(e,"email") }/>
-        <LabelInput label="PASSWORD" type="password" onChange={ (e) => handleChange(e,"passwd") }/>
-        <LabelInput label="PASSWORD CHECK" type="password" onChange={ (e) => handleChange(e,"cpasswd") }/>
+        <LabelInput label="EMAIL" text={email} type="email" onChange={ (e) => handleChange(e,"email") }/>
+        <LabelInput label="PASSWORD" text={passwd} type="password" onChange={ (e) => handleChange(e,"passwd") }/>
+        <LabelInput label="PASSWORD CHECK" text={cPasswd} type="password" onChange={ (e) => handleChange(e,"cpasswd") }/>
         <ButtonContainer>
             <ButtonA label="SIGN UP" onClick={signUp}/>
         </ButtonContainer>

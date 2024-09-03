@@ -10,16 +10,18 @@ const Container = styled.div`
 interface Props {
     readonly label:string;
     readonly text?: string;
+    readonly minRows?: string;
     readonly readOnly?: boolean;
     readonly onChange?:(e:React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void;
+
 }
 
 
 
 
-export const LabelMultilineText = ({label, readOnly=false, text="", onChange}:Props) => {
+export const LabelMultilineText = ({label, readOnly=false, text="", minRows="30", onChange}:Props) => {
     return <Container>
         <Label label={label}/>
-    <MultilineInput onChange={onChange} text={text} readOnly={readOnly} />
+    <MultilineInput onChange={onChange} text={text} minRows={minRows} readOnly={readOnly} />
 </Container>
 }

@@ -33,8 +33,7 @@ export const ImageCarousel = ({items, onClick}:Props) => {
             <Slider {...settings}>
                 {
                     items.map((item, index) => {
-                        console.log("그려짐", item);
-                        return <ImageCard id={item.id} title={item.title} img={item.img} summary={item.summary} onClick={onClick}/>
+                        return <ImageCard key={item.id} id={item.id} title={item.title} img={item.img} summary={item.summary} onClick={onClick}/>
                     })
                 }
             </Slider>

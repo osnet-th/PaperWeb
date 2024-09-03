@@ -9,6 +9,8 @@ import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {login} from "../../Redux/Slice/loginSlice";
+import {axiosInstance} from "../../Axios/instance";
+import {setCookie} from "../../Cookie/cookie";
 
 
 
@@ -42,17 +44,20 @@ export const LoginInput = () => {
     const dispatch = useDispatch();
 
     const loginAction = () => {
-        const form = new FormData();
-        form.append("id", id);
-        form.append("pw", password);
-
-        axios({
-            url:'http://localhost:8080/login-request',
+        const form = {
+            id : id,
+            password : password
+        }
+        axiosInstance({
+            url:'/login-request',
             method:'post',
             data: form,
-        })
-        .then((result)=>{console.log('요청성공 : ', result)
-            dispatch(login());
+        }).then((result)=>{
+            console.log('요청성공 : ', result);
+            // TODO : Redux 사용으로 변경해야 함
+            setCookie("accessToken", result.data.accessToken);
+            setCookie("refreshToken", result.data.refreshToken);
+            dispatch(login(result.data.accessToken));
             navigate("/");
         })
         .catch((error)=>{console.log('요청실패')
@@ -66,8 +71,8 @@ export const LoginInput = () => {
 
     return  <Container>
         <LabelContainer><Label label="Sign In"/></LabelContainer>
-        <LabelInput label="EMAIL" type="email" onChange={e => {handleChange(e, "email")}}/>
-        <LabelInput label="PASSWORD" type="password" onChange={e => {handleChange(e, "password")}}/>
+        <LabelInput label="EMAIL" type="email" text={id} onChange={e => {handleChange(e, "email")}}/>
+        <LabelInput label="PASSWORD" type="password" text={password} onChange={e => {handleChange(e, "password")}}/>
         <RowContainer>
             <CheckBox label="Remember Me"/>
             <TextLink text="Sign Up Here" path="/sign-up"/>

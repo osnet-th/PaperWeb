@@ -18,14 +18,16 @@ public class ProjectEntity {
     private String title;
     private String summary;
     private String content;
+    private String review;
 
     private ProjectEntity() {
 
     }
-    public ProjectEntity(String title, String summary, String content) {
+    public ProjectEntity(String title, String summary, String content, String review) {
         this.title = title;
         this.summary = summary;
         this.content = content;
+        this.review = review;
     }
 
     public void addImages(ProjectImageEntity image) {

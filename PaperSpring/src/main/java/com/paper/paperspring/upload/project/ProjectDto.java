@@ -14,13 +14,15 @@ public class ProjectDto {
     private String title;
     private String summary;
     private String content;
+    private String review;
     private List<UploadImageDto> projectImages;
 
-    public ProjectDto(long id, String title, String summary, String content, List<UploadImageDto> projectImages) {
+    public ProjectDto(long id, String title, String summary, String content, String review, List<UploadImageDto> projectImages) {
         this.id = id;
         this.title = title;
         this.summary = summary;
         this.content = content;
+        this.review = review;
         this.projectImages = projectImages;
     }
 }

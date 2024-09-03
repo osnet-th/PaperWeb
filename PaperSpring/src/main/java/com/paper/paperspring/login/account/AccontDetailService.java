@@ -1,8 +1,5 @@
-package com.paper.paperspring.security;
+package com.paper.paperspring.login.account;
 
-import com.paper.paperspring.login.AccountDetails;
-import com.paper.paperspring.login.AccountEntity;
-import com.paper.paperspring.login.AccountRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,8 +26,6 @@ public class AccontDetailService implements UserDetailsService {
         Optional<AccountEntity> account = accountRepository.findById(username);
         if(account.isEmpty())
             throw new UsernameNotFoundException(username);
-
-        log.info(account.get().toString());
         return new AccountDetails(account.get());
     }
 }

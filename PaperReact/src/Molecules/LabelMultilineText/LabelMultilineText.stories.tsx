@@ -15,6 +15,7 @@ type Story = StoryObj<typeof meta>;
 export const Basic = {
     args:{
         label: "내용",
-        onChange: fn
+        onChange: fn,
+        minRows: "30",
     }
 } satisfies Story;

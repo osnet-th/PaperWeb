@@ -57,13 +57,15 @@ export const AboutMeTemplate = () => {
             axios({
                 url: 'http://localhost:8080/get/about-me',
                 method: 'get',
+                withCredentials: true,
                 headers: {
                     "Content-Type": "application/json",
                 },
                 // data: JSON.stringify(contents),
             })
                 .then((result) => {
-                    setPhoto(result.data.myPhotos.requestUrl);
+                    console.log(result);
+                    setPhoto("http://localhost:8080"+result.data.myPhotos.requestUrl);
                     setTags(result.data.contents);
                     setRequest(false);
                 })

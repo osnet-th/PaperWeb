@@ -17,5 +17,6 @@ export const Basic= {
         text: "",
         onChange: fn,
         readOnly: false,
+        minRows: "30",
     }
 } satisfies Story;

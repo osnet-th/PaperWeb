@@ -6,6 +6,7 @@ import {ButtonA} from "../../Atoms/Button/Button";
 import styled from "@emotion/styled";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
+import {axiosInstance} from "../../Axios/instance";
 
 
 const ButtonContainer = styled.div`
@@ -26,6 +27,7 @@ const Container = styled.div`
 export const ProjectWriteTemplate = () => {
     const [content, setContent] = useState<string>("");
     const [title, setTitle] = useState<string>("");
+    const [review, setReview] = useState<string>("");
     const [summary, setSummary] = useState<string>("");
     const [postImgs, setPostImgs] = useState<File[]>([]);
     const [previewImgs, setPreviewImgs] = useState<string[]>([]);
@@ -74,6 +76,10 @@ export const ProjectWriteTemplate = () => {
         setContent(e.target.value);
     }
 
+    const reviewWrite = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+        setReview(e.target.value);
+    }
+
     const titleWrite = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(e.target.value);
     }
@@ -88,14 +94,16 @@ export const ProjectWriteTemplate = () => {
         formData.append("title", title);
         formData.append("summary", summary);
         formData.append("content", content);
+        formData.append("review", review);
         for (let i = 0; i < postImgs.length; i++) {
             formData.append('imgFiles', postImgs[i]);
         }
 
 
-        axios({
-            url: 'http://localhost:8080/upload/projects',
+        axiosInstance({
+            url: '/upload/projects',
             method: 'post',
+            withCredentials: true,
             data: formData,
             headers: {
                 "Content-Type": "multipart/form-data",
@@ -104,6 +112,7 @@ export const ProjectWriteTemplate = () => {
         })
             .then((result) => {
                 console.log("요청 성공", result.data)
+                navigate("/");
             })
             .catch((error) => {
                 console.log('요청실패')
@@ -126,10 +135,11 @@ export const ProjectWriteTemplate = () => {
     }
 
     return <Container>
-        <LabelInput label="제목" type="text" onChange={titleWrite}/>
+        <LabelInput label="제목" text={title} type="text" onChange={titleWrite}/>
         <LabelImageList previewImg={previewImgs} imageUpload={changeImgs} imageDelete={imageDelete}/>
-        <LabelInput label="요약" type="text" onChange={summaryWrite}/>
-        <LabelMultilineText label="프로젝트 내용" onChange={contentWrite}/>
+        <LabelInput label="요약" text={summary} type="text" onChange={summaryWrite}/>
+        <LabelMultilineText label="프로젝트 내용" text={content} onChange={contentWrite}/>
+        <LabelMultilineText label="후기" text={review} minRows="10" onChange={reviewWrite}/>
         <ButtonContainer>
             <Button>
                 <ButtonA label="취소" size="lg" onClick={writeCancle}/>

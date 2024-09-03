@@ -52,7 +52,7 @@ export const ProjectCarouselTemplate = () => {
                     console.log(data);
                     dataList.push({
                         id: data.id,
-                        img: data.projectImages[0].requestUrl,
+                        img: "http://localhost:8080" + data.projectImages[0].requestUrl,
                         title: data.title,
                         summary: data.summary});
                 });

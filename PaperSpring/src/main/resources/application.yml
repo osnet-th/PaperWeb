@@ -5,12 +5,12 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/Paper?serverTimezone=UTC&characterEncoding=UTF-8
     username: root
-#    password: P@ssw0rd
-    password: dlxogud963
+    password: P@ssw0rd
+#    password: dlxogud963
   jpa:
     show-sql: true # DDL(create, alter, drop) ??? DB? ?? ??? ??? ? ??.
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         format_sql: true
@@ -22,3 +22,7 @@ spring:
     root:
       mac: "/Users/app/Desktop/PaperWeb/Image/"
       win: "C:/Image/"
+
+
+jwt:
+  secret: ZGx4b2d1ZGNobHJocm9xa2Z3a2RseG9ndWRjaGxyaHJvcWtmd2tkbHhvZ3VkY2hscmhyb3FrZndrZGx4b2d1ZGNobHJocm9xa2Z3a2RseG9ndWRjaGxyaHJvcWtmd2tkbHhvZ3VkY2hscmhyb3FrZndrZGx4b2d1ZGNobHJocm9xa2Y=

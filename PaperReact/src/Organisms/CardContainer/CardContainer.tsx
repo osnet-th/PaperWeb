@@ -43,7 +43,6 @@ interface Props {
 
 
 export const CardContainer = ({photo, items}:Props) => {
-
     return(
         <>
         <Container>

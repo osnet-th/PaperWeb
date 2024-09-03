@@ -96,6 +96,7 @@ export const ProjectDetail = () => {
         axios({
             url: 'http://localhost:8080/upload/projects',
             method: 'post',
+            withCredentials: true,
             data: formData,
             headers: {
                 "Content-Type": "multipart/form-data",

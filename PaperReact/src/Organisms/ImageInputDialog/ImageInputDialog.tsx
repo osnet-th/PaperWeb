@@ -1,6 +1,7 @@
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField} from "@mui/material";
 import {Fragment, useState} from "react";
 import axios from "axios";
+import {axiosInstance} from "../../Axios/instance";
 
 
 
@@ -31,9 +32,10 @@ export const ImageInputDialog = ({open, handleClose}: Props) => {
                     const data = new FormData();
                     data.append("image", obj.img);
 
-                    axios({
-                        url: 'http://localhost:8080/upload/about-me/image',
+                    axiosInstance({
+                        url: '/upload/about-me/image',
                         method: 'post',
+                        withCredentials: true,
                         data: data,
                         headers: {
                             "Content-Type": "multipart/form-data",

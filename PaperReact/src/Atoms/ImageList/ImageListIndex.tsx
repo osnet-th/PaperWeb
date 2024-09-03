@@ -27,20 +27,25 @@ export const ImageListIndex = ({imgList, imageDelete}:Props) => {
                         src={`${img}`}
                         alt=""
                         style={{
+
                             width: '300px',
                             height: '400px',
                         }}
                     />
-                    <ImageListItemBar
-                        actionIcon={
-                            <IconButton
-                                sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
-                                onClick={() => imageDelete?.(index)}
-                            >
-                                <DeleteForeverIcon />
-                            </IconButton>
-                        }
-                    />
+                    { imageDelete  ?
+                        <ImageListItemBar
+                            actionIcon={
+                                <IconButton
+                                    sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
+                                    onClick={() => imageDelete?.(index)}
+                                >
+                                    <DeleteForeverIcon />
+                                </IconButton>
+                            }
+                        />
+                        :
+                        <></>
+                    }
                 </ImageListItem>
             ))}
         </ImageList>

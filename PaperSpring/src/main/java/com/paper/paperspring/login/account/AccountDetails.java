@@ -1,4 +1,4 @@
-package com.paper.paperspring.login;
+package com.paper.paperspring.login.account;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
