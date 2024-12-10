@@ -1,4 +1,4 @@
-package com.paper.paperspring.upload.project;
+package com.paper.paperspring.project;
 
 
 import jakarta.persistence.*;
@@ -7,7 +7,7 @@ import lombok.Getter;
 @Entity
 @Table(name="project_image")
 @Getter
-public class ProjectImageEntity {
+public class ProjectImage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -18,8 +18,8 @@ public class ProjectImageEntity {
     @JoinColumn(name="project_id")
     private ProjectEntity project;
 
-    private ProjectImageEntity() {}
-    public ProjectImageEntity(String fileName, String requestUrl, long size) {
+    private ProjectImage() {}
+    public ProjectImage(String fileName, String requestUrl, long size) {
         this.fileName = fileName;
         this.requestUrl = requestUrl;
         this.size = size;

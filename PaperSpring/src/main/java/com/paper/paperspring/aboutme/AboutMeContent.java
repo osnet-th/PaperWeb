@@ -1,4 +1,4 @@
-package com.paper.paperspring.upload.aboutme;
+package com.paper.paperspring.aboutme;
 
 
 import jakarta.persistence.Entity;
@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @Table(name="about_me_content")
-public class AboutMeContentEntity {
+public class AboutMeContent {
 
-    public AboutMeContentEntity(String tag, String content) {
+    public AboutMeContent(String tag, String content) {
         this.tag = tag;
         this.content = content;
     }

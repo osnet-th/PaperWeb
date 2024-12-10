@@ -8,10 +8,10 @@ import java.util.Collection;
 
 public class AccountDetails implements UserDetails {
 
-    private AccountEntity accountEntity;
+    private Account account;
 
-    public AccountDetails(AccountEntity accountEntity) {
-        this.accountEntity = accountEntity;
+    public AccountDetails(Account account) {
+        this.account = account;
     }
 
     @Override
@@ -20,7 +20,7 @@ public class AccountDetails implements UserDetails {
         collection.add(new GrantedAuthority() {
             @Override
             public String getAuthority() {
-                return accountEntity.getRole();
+                return account.getRole();
             }
         });
         return collection;
@@ -28,31 +28,31 @@ public class AccountDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        return this.accountEntity.getPw();
+        return this.account.getPw();
     }
 
     @Override
     public String getUsername() {
-        return this.accountEntity.getId();
+        return this.account.getId();
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return !this.accountEntity.isExpired();
+        return !this.account.isExpired();
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return !this.accountEntity.isLocked();
+        return !this.account.isLocked();
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return !this.accountEntity.isCredentialExpired();
+        return !this.account.isCredentialExpired();
     }
 
     @Override
     public boolean isEnabled() {
-        return this.accountEntity.isEnabled();
+        return this.account.isEnabled();
     }
 }

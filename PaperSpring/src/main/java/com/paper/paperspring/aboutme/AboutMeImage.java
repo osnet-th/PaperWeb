@@ -1,9 +1,8 @@
-package com.paper.paperspring.upload.aboutme;
+package com.paper.paperspring.aboutme;
 
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,7 +15,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="about_me_image")
-public class AboutMeImageEntity {
+public class AboutMeImage {
 
     @Id
     private String fileName;

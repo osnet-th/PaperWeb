@@ -7,7 +7,7 @@ import * as React from "react";
 import {Introduction} from "../../Organisms/Introduction/Introduction";
 import img from "./img.jpg";
 import {Footer} from "../../Organisms/Footer/Footer";
-import {Fab} from "@mui/material";
+import {Chip, Divider, Fab} from "@mui/material";
 import {SelfIntroductionTemplate} from "../../Templates/SelfIntroductionTemplate/SelfIntroductionTemplate";
 
 const CarouselContainer = styled.div`

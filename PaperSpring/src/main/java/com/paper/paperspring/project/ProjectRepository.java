@@ -1,4 +1,4 @@
-package com.paper.paperspring.upload.project;
+package com.paper.paperspring.project;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

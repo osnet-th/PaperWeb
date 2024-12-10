@@ -1,4 +1,4 @@
-package com.paper.paperspring.upload.util;
+package com.paper.paperspring.util;
 
 
 import lombok.Getter;

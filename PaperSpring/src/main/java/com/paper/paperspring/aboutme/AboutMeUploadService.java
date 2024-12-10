@@ -1,13 +1,13 @@
-package com.paper.paperspring.upload.aboutme;
+package com.paper.paperspring.aboutme;
 
 import com.paper.paperspring.exception.JPAFindException;
 import com.paper.paperspring.exception.JPAInsertException;
 import com.paper.paperspring.exception.NotSupportedFileException;
 import com.paper.paperspring.upload.Upload;
 import com.paper.paperspring.upload.UploadImageDto;
-import com.paper.paperspring.upload.util.FileSave;
+import com.paper.paperspring.util.FileSave;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,12 +19,12 @@ import java.util.*;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class AboutMeUploadService extends Upload {
 
-    @Autowired
-    AboutMeImageRepository imageRepository;
-    @Autowired
-    AboutMeContentRepository contentRepository;
+
+    private final AboutMeImageRepository imageRepository;
+    private final AboutMeContentRepository contentRepository;
 
     // 저장 및 수정
     @Transactional
@@ -66,7 +66,7 @@ public class AboutMeUploadService extends Upload {
         }
     }
 
-    private void insertAboutMeImage(AboutMeImageEntity imageEntity) throws JPAInsertException {
+    private void insertAboutMeImage(AboutMeImage imageEntity) throws JPAInsertException {
         try {
             imageRepository.save(imageEntity);
         } catch (Exception e) {
@@ -75,11 +75,11 @@ public class AboutMeUploadService extends Upload {
         }
     }
 
-    private AboutMeImageEntity generateAboutMeImage(MultipartFile image) throws NullPointerException, NotSupportedFileException, IOException {
+    private AboutMeImage generateAboutMeImage(MultipartFile image) throws NullPointerException, NotSupportedFileException, IOException {
 
         try {
             FileSave fileSave = imageUrlBasedUpload(image);
-            return new AboutMeImageEntity(fileSave.getFileName(), fileSave.getRequestUrl(), LocalDateTime.now());
+            return new AboutMeImage(fileSave.getFileName(), fileSave.getRequestUrl(), LocalDateTime.now());
         } catch (NullPointerException e) {
             log.error("AboutMe Image 데이터 조합 중 Null 값이 존재합니다. {}", e.getMessage());
             throw e;
@@ -89,17 +89,17 @@ public class AboutMeUploadService extends Upload {
         }
     }
 
-    private List<AboutMeContentEntity> generateAboutMeContents(List<AboutMeDto.Content> contents) throws NullPointerException {
+    private List<AboutMeContent> generateAboutMeContents(List<AboutMeDto.Content> contents) throws NullPointerException {
         try {
-            List<AboutMeContentEntity> list = new ArrayList<>(contents.size());
-            contents.forEach(content -> list.add(new AboutMeContentEntity(content.getTag(), content.getContent())));
+            List<AboutMeContent> list = new ArrayList<>(contents.size());
+            contents.forEach(content -> list.add(new AboutMeContent(content.getTag(), content.getContent())));
             return list;
         } catch (NullPointerException e) {
             throw e;
         }
     }
 
-    private void insertAboutMeContents(List<AboutMeContentEntity> entities) throws JPAInsertException {
+    private void insertAboutMeContents(List<AboutMeContent> entities) throws JPAInsertException {
         try {
             contentRepository.saveAll(entities);
         } catch (Exception e) {
@@ -115,9 +115,9 @@ public class AboutMeUploadService extends Upload {
 
     private UploadImageDto getAboutMeImage() throws RuntimeException {
         try {
-            Optional<AboutMeImageEntity> image = imageRepository.findFirstByOrderByInsertDateDesc();
-            if (image.isPresent()) {
-                return new UploadImageDto(image.get().getFileName(), image.get().getRequestUrl());
+            AboutMeImage image = imageRepository.findRecentImage();
+            if (Objects.nonNull(image)) {
+                return new UploadImageDto(image.getFileName(), image.getRequestUrl());
             }
             return null;
         } catch (Exception e) {
@@ -129,7 +129,7 @@ public class AboutMeUploadService extends Upload {
     private List<AboutMeDto.Content> getAboutMeContents() throws RuntimeException {
         List<AboutMeDto.Content> result = new ArrayList<>();
         try {
-            List<AboutMeContentEntity> contents = contentRepository.findAll();
+            List<AboutMeContent> contents = contentRepository.findAll();
             if(Objects.isNull(contents) || contents.isEmpty()) return AboutMeDto.defaultContentForm();
             contents.forEach(content -> {
                 result.add(new AboutMeDto.Content(content.getTag(), content.getContent()));

@@ -1,14 +1,13 @@
-package com.paper.paperspring.upload.project;
+package com.paper.paperspring.project;
 
 import com.paper.paperspring.upload.Upload;
 import com.paper.paperspring.upload.UploadImageDto;
-import com.paper.paperspring.upload.util.FileSave;
+import com.paper.paperspring.util.FileSave;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,17 +20,14 @@ public class ProjectUploadService extends Upload {
 
     public ProjectDto getProjectDetail(Long projectId) {
         Optional<ProjectEntity> projectEntity = projectRepository.findById(projectId);
-        if(projectEntity.isPresent()) {
-            return convertProjectDto(projectEntity.get());
-        }
-        return null;
+        return projectEntity.map(this::convertProjectDto).orElse(null);
     }
     public ProjectDto uploadProject(String title, String summary, String content, String review, List<MultipartFile> images) {
         log.info("프로젝트({}) 게시글을 저장합니다. 요약 - {} , 내용 - {}",title, summary, content);
         List<FileSave> fileList = imageUrlBasedUpload(images);
         ProjectEntity projectEntity = new ProjectEntity(title, summary, content, review);
-        fileList.stream().forEach(file -> {
-            ProjectImageEntity imageEntity = new ProjectImageEntity(file.getFileName(), file.getRequestUrl(), file.getFileSize());
+        fileList.forEach(file -> {
+            ProjectImage imageEntity = new ProjectImage(file.getFileName(), file.getRequestUrl(), file.getFileSize());
             imageEntity.setProject(projectEntity);
         });
 

@@ -13,7 +13,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class AccountEntity {
+public class Account {
 
     @Id
     private String id;

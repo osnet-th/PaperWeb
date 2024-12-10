@@ -19,13 +19,20 @@ public class AccontDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        if(Objects.isNull(username) || username.isEmpty()) {
+        if(isBlank(username)) {
             throw new UsernameNotFoundException(username);
         }
 
-        Optional<AccountEntity> account = accountRepository.findById(username);
-        if(account.isEmpty())
+        Account account = accountRepository.findByAccount(username);
+
+        if(Objects.isNull(account))
             throw new UsernameNotFoundException(username);
-        return new AccountDetails(account.get());
+
+        return new AccountDetails(account);
+    }
+
+
+    private boolean isBlank(String username) {
+        return Objects.isNull(username) || username.isEmpty();
     }
 }

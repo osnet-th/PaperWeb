@@ -2,7 +2,7 @@ package com.paper.paperspring.login.login;
 
 
 import com.paper.paperspring.login.account.AccountDto;
-import com.paper.paperspring.login.account.AccountEntity;
+import com.paper.paperspring.login.account.Account;
 import com.paper.paperspring.login.account.AccountRepository;
 import com.paper.paperspring.security.jwt.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,19 +33,17 @@ public class LoginService {
         this.refreshTokenRepository = refreshTokenRepository;
     }
 
-    public AccountDto signUpService(AccountDto joinAccountDto) {
-        AccountEntity accountEntity = new AccountEntity();
-        accountEntity.setId(joinAccountDto.getId());
-        accountEntity.setPw(passwordEncoder.encode(joinAccountDto.getPassword()));
-        accountEntity.setLocked(false);
-        accountEntity.setExpired(false);
-        accountEntity.setRole("MASTER");
-        accountEntity.setEnabled(true);
-        accountEntity.setCredentialExpired(false);
+    public void signUpService(AccountDto joinAccountDto) {
+        Account account = new Account();
+        account.setId(joinAccountDto.getId());
+        account.setPw(passwordEncoder.encode(joinAccountDto.getPassword()));
+        account.setLocked(false);
+        account.setExpired(false);
+        account.setRole("MASTER");
+        account.setEnabled(true);
+        account.setCredentialExpired(false);
 
-        AccountEntity save = accountRepository.save(accountEntity);
-        return joinAccountDto;
-
+        accountRepository.save(account);
     }
 
 

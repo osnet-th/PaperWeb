@@ -1,4 +1,4 @@
-package com.paper.paperspring.upload.aboutme;
+package com.paper.paperspring.aboutme;
 
 import com.paper.paperspring.upload.UploadImageDto;
 import lombok.Getter;

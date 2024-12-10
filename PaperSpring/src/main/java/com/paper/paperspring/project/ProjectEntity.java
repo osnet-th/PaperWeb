@@ -1,4 +1,4 @@
-package com.paper.paperspring.upload.project;
+package com.paper.paperspring.project;
 
 
 import jakarta.persistence.*;
@@ -30,11 +30,11 @@ public class ProjectEntity {
         this.review = review;
     }
 
-    public void addImages(ProjectImageEntity image) {
+    public void addImages(ProjectImage image) {
         this.images.add(image);
     }
 
 
     @OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.REMOVE, CascadeType.PERSIST } , mappedBy = "project")
-    private List<ProjectImageEntity> images = new ArrayList<>();
+    private List<ProjectImage> images = new ArrayList<>();
 }
